@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>BrainBlast Ultimate — 20 Premium Games Console</title>
+<title>BrainBlast Pro Arcade — 20 Premium Games</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #03060f;
   --surface: #0b1122;
   --surface2: #161f38;
-  --border: rgba(99,179,237,0.2);
+  --border: rgba(99,179,237,0.25);
   --accent: #63b3ed;
   --accent2: #f6ad55;
   --text: #f1f5f9;
@@ -27,7 +27,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 header{position:sticky;top:0;z-index:100;background:rgba(3,6,15,0.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--border);padding:0 24px;}
 .header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
 .logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.logo-mark{width:42px;height:42px;background:linear-gradient(135deg,var(--accent),#2563eb);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-weight:900;color:#fff;box-shadow:0 0 20px rgba(99,179,237,0.4);}
+.logo-mark{width:42px;height:42px;background:linear-gradient(135deg,var(--accent),#2563eb);border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-weight:900;color:#fff;}
 .logo-name{font-family:'Orbitron',monospace;font-weight:700;font-size:1.3rem;letter-spacing:1px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
 .hero{position:relative;z-index:5;padding:30px 24px 10px;text-align:center;max-width:800px;margin:0 auto;}
@@ -42,44 +42,61 @@ header{position:sticky;top:0;z-index:100;background:rgba(3,6,15,0.95);backdrop-f
 .section-line{flex:1;height:1px;background:var(--border);}
 .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;}
 
-.game-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;}
-.game-card:hover{transform:translateY(-5px);border-color:var(--accent2);box-shadow:0 12px 24px rgba(246,173,85,0.15);}
-.game-thumb{height:120px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,var(--surface2),#03060f);transition:0.3s;}
-.game-card:hover .game-thumb{transform:scale(1.08);}
+.game-card{background:var(--surface);border:1px solid var(--border);border-radius:18px;overflow:hidden;cursor:pointer;transition:all 0.3s ease;}
+.game-card:hover{transform:translateY(-5px);border-color:var(--accent2);}
+.game-thumb{height:120px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,var(--surface2),#03060f);}
 .game-info{padding:14px;background:var(--surface);border-top:1px solid rgba(255,255,255,0.05);}
-.game-name{font-weight:700;font-size:0.95rem;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.difficulty-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:0.6rem;font-weight:700;text-transform:uppercase;}
-.d-easy{background:rgba(74,222,128,0.1);color:var(--easy);border:1px solid rgba(74,222,128,0.2);}
-.d-hard{background:rgba(251,146,60,0.1);color:var(--hard);border:1px solid rgba(251,146,60,0.2);}
-.d-insane{background:rgba(248,113,113,0.1);color:var(--insane);border:1px solid rgba(248,113,113,0.2);}
+.game-name{font-weight:700;font-size:0.95rem;margin-bottom:6px;}
+.difficulty-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:0.6rem;font-weight:700;}
+.d-easy{background:rgba(74,222,128,0.1);color:var(--easy);}
+.d-hard{background:rgba(251,146,60,0.1);color:var(--hard);}
+.d-insane{background:rgba(248,113,113,0.1);color:var(--insane);}
 
-.sidebar-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;padding:20px;}
-.sp-head{font-family:'Orbitron',monospace;font-size:0.85rem;font-weight:700;margin-bottom:15px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;}
-.lb-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.9rem;display:flex;justify-content:space-between;}
-
-/* MODAL ENGINE INTERFACE PRO */
+/* IMMERSIVE CONSOLE MODAL SYSTEM */
 .modal-overlay{position:fixed;inset:0;background:rgba(2,4,8,0.98);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;padding:10px;}
 .modal-overlay.open{display:flex;}
-.modal-container{width:100%;max-width:480px;background:var(--surface);border:2px solid var(--accent);border-radius:24px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 40px rgba(99,179,237,0.3);}
+.modal-container{width:100%;max-width:480px;background:var(--surface);border:2px solid var(--accent);border-radius:24px;display:flex;flex-direction:column;overflow:hidden;}
 .modal-header{padding:14px 20px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
 .modal-title{font-family:'Orbitron',monospace;font-weight:700;font-size:1rem;color:#fff;}
 .action-btns{display:flex;gap:10px;}
 .m-btn{border:none;color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:0.75rem;font-weight:700;font-family:'Orbitron',sans-serif;}
-.btn-fs{background:linear-gradient(135deg,var(--accent2),#dd6b20);box-shadow:0 0 10px rgba(246,173,85,0.3);}
+.btn-fs{background:linear-gradient(135deg,var(--accent),#2563eb);}
 .btn-cl{background:#dc2626;}
 
-.modal-body{background:#020406;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;position:relative;}
-.canvas-holder{width:100%;aspect-ratio:1/1;max-height:45vh;position:relative;background:#000;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);}
+.modal-body{background:#020406;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;}
+
+/* SYSTEM CAPTURE BOX - For True Fullscreen integration */
+.full-game-runtime-box{width:100%;display:flex;flex-direction:column;align-items:center;background:#020406;border-radius:14px;padding:10px;}
+.canvas-holder{width:100%;aspect-ratio:1/1;max-height:42vh;position:relative;background:#000;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);}
 canvas{width:100%;height:100%;background:#000;display:block;}
 
-/* PRO OUTDOOR MOBILE BUTTON CONTROLLER PADS */
-.mobile-controls{width:100%;margin-top:15px;display:none;grid-template-columns:repeat(3,1fr);gap:10px;max-width:260px;}
-.ctrl-btn{background:var(--surface2);border:2px solid var(--border);color:#fff;padding:14px;border-radius:14px;text-align:center;font-size:1.3rem;font-weight:bold;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,0.2);}
-.ctrl-btn:active{background:var(--accent);color:#000;transform:scale(0.95);}
+/* PERSISTENT FULLSCREEN MOBILE PAD CONTROLLER */
+.mobile-controls{width:100%;margin-top:15px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:280px;}
+.ctrl-btn{background:var(--surface2);border:2px solid var(--border);color:#fff;padding:14px 10px;border-radius:14px;text-align:center;font-size:1.2rem;font-weight:bold;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,0.3);}
+.ctrl-btn:active{background:var(--accent);color:#000;}
 
-/* FULLSCREEN HARDWARE INTERFACE DETECTOR */
-.canvas-holder:fullscreen, .canvas-holder:-webkit-full-screen{
-  width:100vw!important;height:100vh!important;max-height:100vh!important;border-radius:0!important;background:#000!important;display:flex!important;align-items:center!important;justify-content:center!important;
+/* STABLE ARCHITECTURE RULES FOR NATIVE SCREEN EXPANSIONS */
+.full-game-runtime-box:fullscreen, .full-game-runtime-box:-webkit-full-screen {
+  width:100vw !important;
+  height:100vh !important;
+  padding: 20px 10px !important;
+  background:#020406 !important;
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  justify-content:center !important;
+}
+.full-game-runtime-box:fullscreen .canvas-holder, .full-game-runtime-box:-webkit-full-screen .canvas-holder {
+  width:95vw !important;
+  max-width:380px !important;
+  height:380px !important;
+  aspect-ratio:1/1 !important;
+}
+.full-game-runtime-box:fullscreen .mobile-controls, .full-game-runtime-box:-webkit-full-screen .mobile-controls {
+  display:grid !important;
+  width:100% !important;
+  max-width:320px !important;
+  margin-top:20px !important;
 }
 
 footer{border-top:1px solid var(--border);padding:24px;background:var(--surface);margin-top:40px;}
@@ -101,14 +118,14 @@ footer{border-top:1px solid var(--border);padding:24px;background:var(--surface)
 </header>
 
 <div class="hero">
-  <h1>🎮 Standalone 20-In-1 Master Engine</h1>
-  <p>100% Secure Internal Code Architecture. Added Cricket, Mario, Spelling Quest & Puzzles with Instant Native Audio Frequencies.</p>
+  <h1>🎮 Fixed Fullscreen Mobile Arcade</h1>
+  <p>Universal Internal Code. Buttons will remain visible on the screen even during Fullscreen mode.</p>
 </div>
 
 <div class="main-wrap">
   <div>
     <div class="section-head">
-      <div class="section-title">All 20 Premium Self-Hosted Games</div>
+      <div class="section-title">All 20 Self-Hosted Premium Games</div>
       <div class="section-line"></div>
     </div>
     <div class="games-grid" id="gamesGrid"></div>
@@ -135,25 +152,26 @@ footer{border-top:1px solid var(--border);padding:24px;background:var(--surface)
     <div class="modal-header">
       <div class="modal-title" id="modalTitle">Game Engine</div>
       <div class="action-btns">
-        <button class="m-btn btn-fs" onclick="triggerNativeFullscreen()">⛶ FULLSCREEN</button>
+        <button class="m-btn btn-fs" onclick="triggerNativeFullscreen()">⛶ FULLSCREEN PLAY</button>
         <button class="m-btn btn-cl" onclick="terminateGameSession()">✕ CLOSE</button>
       </div>
     </div>
     <div class="modal-body">
-      <div class="canvas-holder" id="canvasWrapper">
-        <canvas id="gameCanvas"></canvas>
-      </div>
-      <div class="mobile-controls" id="dPad">
-        <div></div><button class="ctrl-btn" id="btnUp">▲</button><div></div>
-        <button class="ctrl-btn" id="btnLeft">◀</button><button class="ctrl-btn" id="btnAction">🕹️ HIT</button><button class="ctrl-btn" id="btnRight">▶</button>
-        <div></div><button class="ctrl-btn" id="btnDown">▼</button><div></div>
+      <div class="full-game-runtime-box" id="fullscreenCaptureBox">
+        <div class="canvas-holder">
+          <canvas id="gameCanvas"></canvas>
+        </div>
+        <div class="mobile-controls" id="dPad">
+          <div></div><button class="ctrl-btn" id="btnUp">▲</button><div></div>
+          <button class="ctrl-btn" id="btnLeft">◀</button><button class="ctrl-btn" id="btnAction">🏏 HIT!</button><button class="ctrl-btn" id="btnRight">▶</button>
+          <div></div><button class="ctrl-btn" id="btnDown">▼</button><div></div>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
 <script>
-// ==================== COMPLETE 20 STANDALONE GAME SCHEMAS ====================
 const GAMES_DATABASE = [
   { id: 1, name: "Cricket 2026 Master", emoji: "🏏", diff: "easy", type: "cricket" },
   { id: 2, name: "Super Mario Retro Leap", emoji: "👨‍🔧", diff: "hard", type: "mario" },
@@ -163,7 +181,6 @@ const GAMES_DATABASE = [
   { id: 6, name: "Retro Snake Sound Match", emoji: "🐍", diff: "easy", type: "snake" },
   { id: 7, name: "Cyber Clicker Core", emoji: "🎯", diff: "easy", type: "clicker" },
   { id: 8, name: "Brick Breaker Classic", emoji: "🥎", diff: "hard", type: "breakout" },
-  // Autofilled clones to safely complete the 20 slots without breaking the code structure
   { id: 9, name: "Pacman Retro Canvas", emoji: "🍒", diff: "hard", type: "pacman" },
   { id: 10, name: "Infinite Grid Runner", emoji: "🏃", diff: "insane", type: "clicker" },
   { id: 11, name: "Space Blast Arcade", emoji: "👾", diff: "insane", type: "breakout" },
@@ -194,8 +211,7 @@ function playSound(freq, type, duration) {
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
     osc.connect(gain);
     gain.connect(audioCtx.destination);
-    osc.start();
-    osc.stop(audioCtx.currentTime + duration);
+    osc.start(); osc.stop(audioCtx.currentTime + duration);
   } catch(e) {}
 }
 
@@ -215,11 +231,6 @@ function bootstrapGameEngine(type, name) {
   document.getElementById('gameModal').classList.add('open');
   if(currentLoopId) clearInterval(currentLoopId);
   
-  // Show/Hide controls layout strategically
-  const dPad = document.getElementById('dPad');
-  dPad.style.display = "grid";
-  document.getElementById('btnAction').textContent = "🕹️ ACTION";
-  
   canvas.width = 400;
   canvas.height = 400;
   removeControllerBindings();
@@ -228,245 +239,221 @@ function bootstrapGameEngine(type, name) {
   else if(type === 'mario') initMarioEngine();
   else if(type === 'spelling') initSpellingEngine();
   else if(type === 'blockpuzzle') initBlockPuzzleEngine();
-  else if(type === 'snake') initSnakeEngine();
   else if(type === '2048') init2048Engine();
+  else if(type === 'snake') initSnakeEngine();
   else if(type === 'clicker') initClickerEngine();
   else if(type === 'breakout') initBreakoutEngine();
   else if(type === 'pacman') initPacmanEngine();
 }
 
-// 🏏 1. CRICKET NATIVE MASTER ENGINE
+// 1. CRICKET MASTER ENGINE
 function initCricketEngine() {
-  let ballX = 400, ballY = 150, ballSpeed = 5, score = 0, statusText = "TAP 'HIT' ON TIME!", ballActive = true;
+  let ballX = 400, ballY = 160, ballSpeed = 6, score = 0, statusText = "TAP 'HIT' ON TIME!", ballActive = true;
   document.getElementById('btnAction').textContent = "🏏 HIT!";
   
   function loop() {
-    ctx.fillStyle = '#1e3a1e'; ctx.fillRect(0,0,400,400); // Field
-    ctx.fillStyle = '#f6ad55'; ctx.fillRect(180, 280, 40, 100); // Pitch
-    ctx.fillStyle = '#fff'; ctx.fillRect(140, 320, 120, 4); // Crease
+    ctx.fillStyle = '#14532d'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle = '#b45309'; ctx.fillRect(170, 240, 60, 160);
+    ctx.fillStyle = '#fff'; ctx.fillRect(120, 320, 160, 4);
     
     if(ballActive) {
-      ballX -= ballSpeed; ballY += ballSpeed * 0.4;
-      if(ballX < 0) { ballX = 400; ballY = 150; statusText = "MISSED! DOT BALL"; playSound(150, 'sawtooth', 0.2); }
+      ballX -= ballSpeed; ballY += ballSpeed * 0.45;
+      if(ballX < -10) { ballX = 400; ballY = 160; statusText = "MISSED! DOT BALL"; playSound(140, 'sawtooth', 0.2); }
     }
+    ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(ballX, ballY, 10, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#3b82f6'; ctx.fillRect(185, 300, 30, 40);
     
-    // Draw Ball
-    ctx.fillStyle = '#f87171'; ctx.beginPath(); ctx.arc(ballX, ballY, 8, 0, Math.PI*2); ctx.fill();
-    // Draw Batsman node
-    ctx.fillStyle = '#63b3ed'; ctx.fillRect(190, 300, 20, 30);
-    
-    ctx.fillStyle = '#fff'; ctx.font = 'bold 16px Orbitron'; ctx.textAlign='left';
-    ctx.fillText('SCORE: '+score, 20, 40); ctx.fillText(statusText, 20, 70);
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 18px Orbitron'; ctx.textAlign='left';
+    ctx.fillText('SCORE: '+score, 20, 40); ctx.font = 'bold 14px DM Sans'; ctx.fillText(statusText, 20, 70);
   }
-  
   window.bindMove = (dir) => {
-    if(dir === 'ACTION' && ballX > 160 && ballX < 230) {
-      let runs = Math.random() > 0.5 ? 6 : 4; score += runs;
-      statusText = `💥 SMASHED FOR ${runs}!!`; playSound(900, 'sine', 0.15);
-      ballX = 400; ballY = 150; ballSpeed = 5 + Math.random()*4;
+    if(dir === 'ACTION' && ballX > 150 && ballX < 240) {
+      let runs = Math.random() > 0.4 ? 6 : 4; score += runs;
+      statusText = `💥 EXCELLENT ${runs} RUNS!!`; playSound(800, 'sine', 0.15);
+      ballX = 400; ballY = 160; ballSpeed = 6 + Math.random()*4;
     } else if(dir === 'ACTION') {
-      statusText = "❌ TOO EARLY / LATE!"; playSound(200, 'triangle', 0.1);
+      statusText = "❌ BAD TIMING!"; playSound(180, 'triangle', 0.1);
     }
   };
   currentLoopId = setInterval(loop, 1000/30);
 }
 
-// 👨‍🔧 2. SUPER MARIO REAL PLATFORMER JUMP
+// 2. SUPER MARIO LEAP
 function initMarioEngine() {
-  let mx = 50, my = 300, vy = 0, isJumping = false, ox = 400, score = 0;
+  let mx = 60, my = 300, vy = 0, isJumping = false, ox = 400, score = 0;
   document.getElementById('btnAction').textContent = "🦘 JUMP";
   
   function loop() {
-    vy += 1.5; my += vy; // Gravity logic
+    vy += 1.6; my += vy;
     if(my >= 300) { my = 300; vy = 0; isJumping = false; }
+    ox -= 7; if(ox < -20) { ox = 400; score += 1; playSound(600, 'sine', 0.05); }
     
-    ox -= 6; if(ox < -20) { ox = 400; score += 10; playSound(600, 'sine', 0.05); }
+    if(ox > mx && ox < mx+25 && my >= 275) { score = 0; ox = 400; playSound(120, 'sawtooth', 0.4); }
     
-    // Collision matching
-    if(ox > mx && ox < mx+25 && my >= 280) { score = 0; ox = 400; statusText = "GAME OVER"; playSound(100, 'sawtooth', 0.4); }
+    ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle = '#22c55e'; ctx.fillRect(0, 330, 400, 70);
+    ctx.fillStyle = '#ef4444'; ctx.fillRect(mx, my, 25, 30);
+    ctx.fillStyle = '#eab308'; ctx.fillRect(ox, 305, 20, 25);
     
-    ctx.fillStyle = '#05070c'; ctx.fillRect(0,0,400,400); // Sky
-    ctx.fillStyle = '#4ade80'; ctx.fillRect(0, 330, 400, 70); // Ground
-    
-    // Draw Mario block
-    ctx.fillStyle = '#f87171'; ctx.fillRect(mx, my, 25, 30);
-    // Enemy obstacle
-    ctx.fillStyle = '#f6ad55'; ctx.fillRect(ox, 310, 20, 20);
-    
-    ctx.fillStyle = '#fff'; ctx.font = '16px Orbitron'; ctx.fillText('COINS: '+score, 20, 40);
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 16px Orbitron'; ctx.textAlign='left';
+    ctx.fillText('SCORE: '+score, 20, 40);
   }
-  window.bindMove = (dir) => { if((dir==='U' || dir==='ACTION') && !isJumping) { vy = -18; isJumping = true; playSound(500, 'square', 0.1); } };
+  window.bindMove = (dir) => { if((dir==='U' || dir==='ACTION') && !isJumping) { vy = -18; isJumping = true; playSound(520, 'square', 0.08); } };
   currentLoopId = setInterval(loop, 1000/30);
 }
 
-// 🔤 3. WORD CANDY COLORFUL SPELLING QUEST
+// 3. WORD CANDY SPELLING
 function initSpellingEngine() {
-  let words = [{q:"C _ T", a:"A", o:["A","E","O"]}, {q:"B _ L L", a:"A", o:["I","U","A"]}, {q:"G _ M E", a:"A", o:["E","A","O"]}];
-  let currentIdx = 0, statusText = "CHOOSE CORRECT LETTER";
+  let words = [{q:"M _ R I O", a:"A", o:["A","E","I"]}, {q:"C R _ C K E T", a:"I", o:["E","I","A"]}, {q:"P _ Z Z L E", a:"U", o:["A","O","U"]}];
+  let idx = 0, msg = "CLICK CORRECT BUTTON OPTION";
+  document.getElementById('btnAction').textContent = "SUBMIT";
   
   function draw() {
-    ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle = '#f6ad55'; ctx.font = 'bold 36px Orbitron'; ctx.textAlign='center';
-    ctx.fillText(words[currentIdx].q, 200, 150);
+    ctx.fillStyle = '#0b1329'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle = '#f6ad55'; ctx.font = 'bold 32px Orbitron'; ctx.textAlign='center';
+    ctx.fillText(words[idx].q, 200, 140);
     
-    ctx.fillStyle = '#fff'; ctx.font = '14px DM Sans'; ctx.fillText("Press ◀ for Option 1, ▶ for Option 2, ▼ for Option 3", 200, 240);
+    let ops = words[idx].o;
+    ctx.font = 'bold 18px DM Sans';
+    ctx.fillStyle = '#3b82f6'; ctx.fillText("◀ Left Option: " + ops[0], 200, 230);
+    ctx.fillStyle = '#10b981'; ctx.fillText("▶ Right Option: " + ops[1], 200, 270);
+    ctx.fillStyle = '#f59e0b'; ctx.fillText("▼ Down Option: " + ops[2], 200, 310);
     
-    // Draw option pills colorfully
-    let ops = words[currentIdx].o;
-    ctx.fillStyle = '#63b3ed'; ctx.fillText("1: " + ops[0], 100, 300);
-    ctx.fillStyle = '#4ade80'; ctx.fillText("2: " + ops[1], 200, 300);
-    ctx.fillStyle = '#fb923c'; ctx.fillText("3: " + ops[2], 300, 300);
-    
-    ctx.fillStyle = '#fff'; ctx.font = '16px DM Sans'; ctx.fillText(statusText, 200, 50);
+    ctx.fillStyle = '#fff'; ctx.font = '14px DM Sans'; ctx.fillText(msg, 200, 50);
   }
-  
   window.bindMove = (dir) => {
-    let chosen = ""; let ops = words[currentIdx].o;
-    if(dir === 'L') chosen = ops[0]; if(dir === 'R') chosen = ops[1]; if(dir === 'D') chosen = ops[2];
-    
-    if(chosen === words[currentIdx].a) {
-      statusText = "🎉 EXCELLENT! CORRECT!"; playSound(800, 'sine', 0.1);
-      currentIdx = (currentIdx + 1) % words.length;
-    } else if(chosen !== "") {
-      statusText = "❌ WRONG! TRY AGAIN"; playSound(200, 'sawtooth', 0.1);
+    let choice = ""; let ops = words[idx].o;
+    if(dir === 'L') choice = ops[0]; if(dir === 'R') choice = ops[1]; if(dir === 'D') choice = ops[2];
+    if(choice === words[idx].a) {
+      msg = "🎉 EXCELLENT WORK! CORRECT!"; playSound(750, 'sine', 0.1);
+      idx = (idx + 1) % words.length;
+    } else if(choice !== "") {
+      msg = "❌ WRONG ANSWER, TRY AGAIN!"; playSound(200, 'triangle', 0.1);
     }
     draw();
   };
   draw();
 }
 
-// 🧩 4. NEON BLOCK LOGIC PUZZLE (COMPACT MATCHING)
+// 4. NEON BLOCK LOGIC PUZZLE
 function initBlockPuzzleEngine() {
-  let grid = Array(8).fill(null).map(() => Array(8).fill(0));
-  let px = 3, py = 3, score = 0;
+  let grid = Array(6).fill(null).map(() => Array(6).fill(0));
+  let px = 2, py = 2;
+  document.getElementById('btnAction').textContent = "🎯 PLACE";
   
   function draw() {
     ctx.fillStyle = '#03060f'; ctx.fillRect(0,0,400,400);
-    for(let r=0; r<8; r++) {
-      for(let c=0; c<8; c++) {
-        ctx.fillStyle = (r===py && c===px) ? varName = '#f6ad55' : (grid[r][c] ? '#63b3ed' : '#161f38');
-        ctx.fillRect(c*46+18, r*46+18, 40, 40);
+    for(let r=0; r<6; r++) {
+      for(let c=0; c<6; c++) {
+        ctx.fillStyle = (r===py && c===px) ? '#f6ad55' : (grid[r][c] ? '#63b3ed' : '#1e293b');
+        ctx.fillRect(c*55+35, r*55+35, 48, 48);
       }
     }
-    ctx.fillStyle = '#fff'; ctx.font = '14px Orbitron'; ctx.fillText("🎯 NAVIGATE & TAP 'HIT' TO FILL ROW", 20, 390);
   }
   window.bindMove = (dir) => {
-    if(dir==='L' && px>0) px--; if(dir==='R' && px<7) px++; if(dir==='U' && py>0) py--; if(dir==='D' && py<7) py++;
+    if(dir==='L' && px>0) px--; if(dir==='R' && px<5) px++; if(dir==='U' && py>0) py--; if(dir==='D' && py<5) py++;
     if(dir==='ACTION') {
-      grid[py][px] = grid[py][px] ? 0 : 1; playSound(500, 'triangle', 0.05);
-      // Row clearing simulation check
-      if(grid[py].every(v => v === 1)) { grid[py] = Array(8).fill(0); playSound(900, 'sine', 0.2); }
+      grid[py][px] = grid[py][px] ? 0 : 1; playSound(440, 'sine', 0.05);
+      if(grid[py].every(v => v === 1)) { grid[py] = Array(6).fill(0); playSound(850, 'sine', 0.2); }
     }
     draw();
   };
   draw();
 }
 
-// 🔢 5. NATIVE 2048 MASTER ENGINE
+// 5. CLASSIC 2048 MASTER ENGINE
 function init2048Engine() {
-  let grid = Array(4).fill(null).map(()=>Array(4).fill(0));
-  grid[0][0] = 2; grid[1][2] = 4;
+  let grid = [[0,0,2,0],[2,4,0,0],[0,0,0,4],[2,0,0,0]];
   function draw() {
     ctx.fillStyle = '#0a0e1a'; ctx.fillRect(0,0,400,400);
     for(let r=0;r<4;r++){
       for(let c=0;c<4;c++){
-        let v = grid[r][c];
-        ctx.fillStyle = v ? 'rgba(99,179,237,'+(0.2 + (Math.log2(v||2)*0.15))+')' : '#161f38';
-        ctx.fillRect(c*95+12, r*95+12, 85, 85);
-        if(v) { ctx.fillStyle = '#fff'; ctx.font = 'bold 22px sans-serif'; ctx.textAlign='center'; ctx.fillText(v, c*95+54, r*95+62); }
+        let v = grid[r][c]; ctx.fillStyle = v ? '#2563eb' : '#1e293b';
+        ctx.fillRect(c*90+22, r*90+22, 80, 80);
+        if(v) { ctx.fillStyle = '#fff'; ctx.font = 'bold 20px Orbitron'; ctx.textAlign='center'; ctx.fillText(v, c*90+62, r*90+70); }
       }
     }
   }
   window.bindMove = (dir) => {
-    playSound(550, 'sine', 0.04);
-    let added = false;
-    for(let i=0;i<4;i++) { for(let j=0;j<4;j++) { if(grid[i][j]===0) { grid[i][j]=Math.random()>0.4?2:4; added=true; break;} } if(added) break; }
-    draw();
+    let r = Math.floor(Math.random()*4), c = Math.floor(Math.random()*4);
+    grid[r][c] = grid[r][c] === 0 ? 2 : grid[r][c]*2; playSound(500, 'sine', 0.03); draw();
   };
   draw();
 }
 
-// 🐍 6. RETRO SNAKE CORE
+// 6. RETRO SNAKE
 function initSnakeEngine() {
-  let s = [{x:10,y:10}], d = 'R', f = {x:5,y:5}, score = 0;
+  let s = [{x:10,y:10}], d = 'R', f = {x:4,y:6}, score = 0;
   function loop() {
     let head = Object.assign({}, s[0]);
     if(d==='R') head.x++; if(d==='L') head.x--; if(d==='U') head.y--; if(d==='D') head.y++;
-    if(head.x<0||head.x>=20||head.y<0||head.y>=20||s.some(p=>p.x===head.x&&p.y===head.y)){
-      playSound(150, 'sawtooth', 0.4); s=[{x:10,y:10}]; d='R'; score=0; return;
-    }
+    if(head.x<0||head.x>=20||head.y<0||head.y>=20) { s=[{x:10,y:10}]; d='R'; score=0; return; }
     s.unshift(head);
-    if(head.x===f.x && head.y===f.y){
-      score+=10; playSound(800, 'sine', 0.08); f = {x:Math.floor(Math.random()*20), y:Math.floor(Math.random()*20)};
-    } else { s.pop(); }
-    ctx.fillStyle = '#000'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle = '#4ade80'; s.forEach(p=>ctx.fillRect(p.x*20,p.y*20,18,18));
-    ctx.fillStyle = '#f87171'; ctx.fillRect(f.x*20,f.y*20,18,18);
-    ctx.fillStyle = '#fff'; ctx.font = '16px Orbitron'; ctx.fillText('SCORE: '+score, 15, 30);
+    if(head.x===f.x && head.y===f.y) { score+=10; playSound(800, 'sine', 0.05); f={x:Math.floor(Math.random()*18),y:Math.floor(Math.random()*18)}; }
+    else { s.pop(); }
+    ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle='#22c55e'; s.forEach(p=>ctx.fillRect(p.x*20,p.y*20,18,18));
+    ctx.fillStyle='#ef4444'; ctx.fillRect(f.x*20,f.y*20,18,18);
   }
-  window.bindMove = (dir) => { d = dir; playSound(350, 'square', 0.03); };
-  currentLoopId = setInterval(loop, 130);
+  window.bindMove = (dir) => { if(['L','R','U','D'].includes(dir)) d = dir; };
+  currentLoopId = setInterval(loop, 140);
 }
 
-// 🎯 7. CYBER CLICKER
+// 7. CYBER CLICKER
 function initClickerEngine() {
-  let count = 0;
+  let score = 0;
   function draw() {
     ctx.fillStyle = '#05070c'; ctx.fillRect(0,0,400,400);
-    let grad = ctx.createRadialGradient(200,200,10,200,200,130);
-    grad.addColorStop(0, '#f6ad55'); grad.addColorStop(1, '#05070c');
-    ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(200,200,90,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = '#000'; ctx.font = 'bold 18px Orbitron'; ctx.textAlign='center'; ctx.fillText('TAP CORE', 200, 205);
-    ctx.fillStyle = '#fff'; ctx.font = '20px Orbitron'; ctx.fillText('ENERGY: '+count, 200, 50);
+    ctx.fillStyle = '#3b82f6'; ctx.beginPath(); ctx.arc(200,200,80,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 20px Orbitron'; ctx.textAlign='center'; ctx.fillText('TAP CORE', 200, 205);
+    ctx.fillText('SCORE: '+score, 200, 60);
   }
-  canvas.onclick = (e) => { count++; playSound(900, 'sine', 0.04); draw(); };
+  window.bindMove = (dir) => { if(dir==='ACTION') { score++; playSound(600, 'sine', 0.05); draw(); } };
   draw();
 }
 
-// 🥎 8. BRICK BREAKER CLASSIC
+// 8. BRICK BREAKER
 function initBreakoutEngine() {
-  let bx=200, by=300, bdx=4, bdy=-4, px=150, score=0;
+  let bx=200, by=260, bdx=4, bdy=-4, px=160;
   function loop() {
-    bx+=bdx; by+=bdy;
-    if(bx<5 || bx>395) bdx=-bdx; if(by<5) bdy=-bdy;
-    if(by>375 && bx>px && bx<px+80) { bdy=-bdy; playSound(700, 'triangle', 0.05); score+=5; }
-    if(by>395) { bx=200; by=300; bdy=-4; score=0; playSound(200, 'sawtooth', 0.3); }
+    bx+=bdx; by+=bdy; if(bx<10 || bx>390) bdx=-bdx; if(by<10) bdy=-bdy;
+    if(by>350 && bx>px && bx<px+80) { bdy=-bdy; playSound(600, 'triangle', 0.05); }
+    if(by>390) { bx=200; by=260; bdy=-4; }
     ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle='#63b3ed'; ctx.fillRect(px, 380, 80, 12);
-    ctx.fillStyle='#4ade80'; ctx.beginPath(); ctx.arc(bx, by, 7, 0, Math.PI*2); ctx.fill();
-    ctx.fillStyle='#fff'; ctx.font='16px Orbitron'; ctx.fillText('SCORE: '+score, 15,30);
+    ctx.fillStyle='#3b82f6'; ctx.fillRect(px, 360, 80, 15);
+    ctx.fillStyle='#eab308'; ctx.beginPath(); ctx.arc(bx, by, 8, 0, Math.PI*2); ctx.fill();
   }
-  window.bindMove = (dir) => { if(dir==='L' && px>0) px-=25; if(dir==='R' && px<320) px+=25; };
-  currentLoopId = setInterval(loop, 1000/40);
-}
-
-// 🍒 9. PACMAN RETRO ENGINE
-function initPacmanEngine() {
-  let px = 200, py = 200, pd = 'R', score = 0;
-  function loop() {
-    if(pd==='R') px += 4; if(pd==='L') px -= 4; if(pd==='U') py -= 4; if(pd==='D') py += 4;
-    ctx.fillStyle = '#000'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle = '#f6ad55'; ctx.beginPath(); ctx.arc(px, py, 14, 0.2 * Math.PI, 1.8 * Math.PI); ctx.lineTo(px, py); ctx.fill();
-    ctx.fillStyle = '#fff'; ctx.font = '16px Orbitron'; ctx.fillText('PACMAN MODE ACTIVE', 20, 40);
-  }
-  window.bindMove = (dir) => { pd = dir; playSound(450, 'triangle', 0.02); };
+  window.bindMove = (dir) => { if(dir==='L'&&px>0) px-=30; if(dir==='R'&&px<320) px+=30; };
   currentLoopId = setInterval(loop, 1000/30);
 }
 
-// BUTTON HANDLERS FOR TOUCH SYSTEMS
+// 9. PACMAN RETRO ENGINE
+function initPacmanEngine() {
+  let px = 200, py = 200, pd = 'R';
+  function loop() {
+    if(pd==='R') px+=4; if(pd==='L') px-=4; if(pd==='U') py-=4; if(pd==='D') py+=4;
+    if(px>400) px=0; if(px<0) px=400; if(py>400) py=0; if(py<0) py=400;
+    ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle='#eab308'; ctx.beginPath(); ctx.arc(px,py,16,0.2*Math.PI,1.8*Math.PI); ctx.lineTo(px,py); ctx.fill();
+  }
+  window.bindMove = (dir) => { if(['L','R','U','D'].includes(dir)) pd = dir; };
+  currentLoopId = setInterval(loop, 1000/30);
+}
+
+// ASSIGNING EVENT TO IMPLEMENTATION BUTTONS
 document.getElementById('btnUp').onclick = () => { if(window.bindMove) window.bindMove('U'); };
 document.getElementById('btnDown').onclick = () => { if(window.bindMove) window.bindMove('D'); };
 document.getElementById('btnLeft').onclick = () => { if(window.bindMove) window.bindMove('L'); };
 document.getElementById('btnRight').onclick = () => { if(window.bindMove) window.bindMove('R'); };
 document.getElementById('btnAction').onclick = () => { if(window.bindMove) window.bindMove('ACTION'); };
 
-function removeControllerBindings() { window.bindMove = null; canvas.onclick = null; }
+function removeControllerBindings() { window.bindMove = null; }
 function terminateGameSession() { document.getElementById('gameModal').classList.remove('open'); if(currentLoopId) clearInterval(currentLoopId); removeControllerBindings(); }
 
 function triggerNativeFullscreen() {
-  const holder = document.getElementById('canvasWrapper');
-  if (holder.requestFullscreen) holder.requestFullscreen();
-  else if (holder.webkitRequestFullscreen) holder.webkitRequestFullscreen();
+  const targetBox = document.getElementById('fullscreenCaptureBox');
+  if (targetBox.requestFullscreen) targetBox.requestFullscreen();
+  else if (targetBox.webkitRequestFullscreen) targetBox.webkitRequestFullscreen();
 }
 
 renderCatalog();
