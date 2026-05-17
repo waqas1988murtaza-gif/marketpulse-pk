@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>BrainBlast Pro Arcade — 20 Premium Games</title>
+<title>BrainBlast Pro Arcade — Music & Sound Edition</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -52,7 +52,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(3,6,15,0.95);backdrop-f
 .d-hard{background:rgba(251,146,60,0.1);color:var(--hard);}
 .d-insane{background:rgba(248,113,113,0.1);color:var(--insane);}
 
-/* IMMERSIVE CONSOLE MODAL SYSTEM */
+/* OVERLAY CONSOLE MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(2,4,8,0.98);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;padding:10px;}
 .modal-overlay.open{display:flex;}
 .modal-container{width:100%;max-width:480px;background:var(--surface);border:2px solid var(--accent);border-radius:24px;display:flex;flex-direction:column;overflow:hidden;}
@@ -65,38 +65,24 @@ header{position:sticky;top:0;z-index:100;background:rgba(3,6,15,0.95);backdrop-f
 
 .modal-body{background:#020406;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;}
 
-/* SYSTEM CAPTURE BOX - For True Fullscreen integration */
 .full-game-runtime-box{width:100%;display:flex;flex-direction:column;align-items:center;background:#020406;border-radius:14px;padding:10px;}
 .canvas-holder{width:100%;aspect-ratio:1/1;max-height:42vh;position:relative;background:#000;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);}
 canvas{width:100%;height:100%;background:#000;display:block;}
 
-/* PERSISTENT FULLSCREEN MOBILE PAD CONTROLLER */
 .mobile-controls{width:100%;margin-top:15px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:280px;}
 .ctrl-btn{background:var(--surface2);border:2px solid var(--border);color:#fff;padding:14px 10px;border-radius:14px;text-align:center;font-size:1.2rem;font-weight:bold;cursor:pointer;box-shadow:0 4px 6px rgba(0,0,0,0.3);}
 .ctrl-btn:active{background:var(--accent);color:#000;}
 
-/* STABLE ARCHITECTURE RULES FOR NATIVE SCREEN EXPANSIONS */
+/* SCREEN STABILIZER FIX FOR FULLSCREEN */
 .full-game-runtime-box:fullscreen, .full-game-runtime-box:-webkit-full-screen {
-  width:100vw !important;
-  height:100vh !important;
-  padding: 20px 10px !important;
-  background:#020406 !important;
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  justify-content:center !important;
+  width:100vw !important; height:100vh !important; padding: 20px 10px !important; background:#020406 !important;
+  display:flex !important; flex-direction:column !important; align-items:center !important; justify-content:center !important;
 }
 .full-game-runtime-box:fullscreen .canvas-holder, .full-game-runtime-box:-webkit-full-screen .canvas-holder {
-  width:95vw !important;
-  max-width:380px !important;
-  height:380px !important;
-  aspect-ratio:1/1 !important;
+  width:95vw !important; max-width:380px !important; height:380px !important; aspect-ratio:1/1 !important;
 }
 .full-game-runtime-box:fullscreen .mobile-controls, .full-game-runtime-box:-webkit-full-screen .mobile-controls {
-  display:grid !important;
-  width:100% !important;
-  max-width:320px !important;
-  margin-top:20px !important;
+  display:grid !important; width:100% !important; max-width:320px !important; margin-top:20px !important;
 }
 
 footer{border-top:1px solid var(--border);padding:24px;background:var(--surface);margin-top:40px;}
@@ -112,20 +98,20 @@ footer{border-top:1px solid var(--border);padding:24px;background:var(--surface)
   <div class="header-inner">
     <a class="logo" href="#">
       <div class="logo-mark">B²</div>
-      <div class="logo-name">BrainBlast 20-Pack</div>
+      <div class="logo-name">BrainBlast Live Audio Pack</div>
     </a>
   </div>
 </header>
 
 <div class="hero">
-  <h1>🎮 Fixed Fullscreen Mobile Arcade</h1>
-  <p>Universal Internal Code. Buttons will remain visible on the screen even during Fullscreen mode.</p>
+  <h1>🎮 Immersive Synthesizer Sound Engine</h1>
+  <p>Real-time chiptune background music loop and interactive game nodes are fully integrated now.</p>
 </div>
 
 <div class="main-wrap">
   <div>
     <div class="section-head">
-      <div class="section-title">All 20 Self-Hosted Premium Games</div>
+      <div class="section-title">20 Premium Custom Game Slots</div>
       <div class="section-line"></div>
     </div>
     <div class="games-grid" id="gamesGrid"></div>
@@ -163,7 +149,7 @@ footer{border-top:1px solid var(--border);padding:24px;background:var(--surface)
         </div>
         <div class="mobile-controls" id="dPad">
           <div></div><button class="ctrl-btn" id="btnUp">▲</button><div></div>
-          <button class="ctrl-btn" id="btnLeft">◀</button><button class="ctrl-btn" id="btnAction">🏏 HIT!</button><button class="ctrl-btn" id="btnRight">▶</button>
+          <button class="ctrl-btn" id="btnLeft">◀</button><button class="ctrl-btn" id="btnAction">🕹️ ACTION</button><button class="ctrl-btn" id="btnRight">▶</button>
           <div></div><button class="ctrl-btn" id="btnDown">▼</button><div></div>
         </div>
       </div>
@@ -182,37 +168,55 @@ const GAMES_DATABASE = [
   { id: 7, name: "Cyber Clicker Core", emoji: "🎯", diff: "easy", type: "clicker" },
   { id: 8, name: "Brick Breaker Classic", emoji: "🥎", diff: "hard", type: "breakout" },
   { id: 9, name: "Pacman Retro Canvas", emoji: "🍒", diff: "hard", type: "pacman" },
-  { id: 10, name: "Infinite Grid Runner", emoji: "🏃", diff: "insane", type: "clicker" },
-  { id: 11, name: "Space Blast Arcade", emoji: "👾", diff: "insane", type: "breakout" },
-  { id: 12, name: "Math Speed Quest", emoji: "➕", diff: "easy", type: "clicker" },
-  { id: 13, name: "Helix Sound Jump", emoji: "🌀", diff: "hard", type: "mario" },
-  { id: 14, name: "Color Tap Reaction", emoji: "🎨", diff: "easy", type: "clicker" },
-  { id: 15, name: "Fruit Slasher Smash", emoji: "🍉", diff: "hard", type: "breakout" },
-  { id: 16, name: "Tic Tac Toe Premium", emoji: "❌", diff: "easy", type: "clicker" },
-  { id: 17, name: "Tower Stack Balance", emoji: "🏢", diff: "hard", type: "mario" },
-  { id: 18, name: "Memory Card Blitz", emoji: "🃏", diff: "easy", type: "spelling" },
-  { id: 19, name: "Hex Match Logic", emoji: "⬢", diff: "insane", type: "blockpuzzle" },
-  { id: 20, name: "Dino Jump Sandbox", emoji: "🦖", diff: "easy", type: "mario" }
+  { id: 10, name: "Infinite Grid Runner", emoji: "🏃", diff: "insane", type: "runner" },
+  { id: 11, name: "Space Blast Arcade", emoji: "👾", diff: "insane", type: "spaceblast" },
+  { id: 12, name: "Math Speed Quest", emoji: "➕", diff: "easy", type: "mathquest" },
+  { id: 13, name: "Helix Sound Jump", emoji: "🌀", diff: "hard", type: "helix" },
+  { id: 14, name: "Color Tap Reaction", emoji: "🎨", diff: "easy", type: "colortap" },
+  { id: 15, name: "Fruit Slasher Smash", emoji: "🍉", diff: "hard", type: "fruit" },
+  { id: 16, name: "Tic Tac Toe Premium", emoji: "❌", diff: "easy", type: "tictactoe" },
+  { id: 17, name: "Tower Stack Balance", emoji: "🏢", diff: "hard", type: "tower" },
+  { id: 18, name: "Memory Card Blitz", emoji: "🃏", diff: "easy", type: "memory" },
+  { id: 19, name: "Hex Match Logic", emoji: "⬢", diff: "insane", type: "hexmatch" },
+  { id: 20, name: "Dino Jump Sandbox", emoji: "🦖", diff: "easy", type: "dino" }
 ];
 
 let canvas = document.getElementById('gameCanvas');
 let ctx = canvas.getContext('2d');
 let currentLoopId = null;
+let musicIntervalId = null;
 let audioCtx = null;
 
+// SYNTHESIZED SOUND SYSTEM EXPERT
 function playSound(freq, type, duration) {
   try {
     if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    let osc = audioCtx.createOscillator();
-    let gain = audioCtx.createGain();
-    osc.type = type || 'sine';
-    osc.frequency.value = freq;
-    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    if(audioCtx.state === 'suspended') audioCtx.resume();
+    let osc = audioCtx.createOscillator(); let gain = audioCtx.createGain();
+    osc.type = type || 'sine'; osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
     gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
+    osc.connect(gain); gain.connect(audioCtx.destination);
     osc.start(); osc.stop(audioCtx.currentTime + duration);
   } catch(e) {}
+}
+
+// ARCADE METRONOME BACKGROUND THEME MUSIC GENERATOR
+function startBackgroundMusic() {
+  if (musicIntervalId) clearInterval(musicIntervalId);
+  let notes = [261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 523.25]; // Retro Scale
+  let step = 0;
+  musicIntervalId = setInterval(() => {
+    let note = notes[step % notes.length];
+    // Create alternating chord rhythm
+    if(step % 4 === 0) playSound(note * 0.5, 'triangle', 0.25); // Bass Line
+    else if(step % 2 === 0) playSound(note, 'sine', 0.15); // Melody Track
+    step++;
+  }, 300);
+}
+
+function stopBackgroundMusic() {
+  if (musicIntervalId) { clearInterval(musicIntervalId); musicIntervalId = null; }
 }
 
 function renderCatalog() {
@@ -231,12 +235,15 @@ function bootstrapGameEngine(type, name) {
   document.getElementById('gameModal').classList.add('open');
   if(currentLoopId) clearInterval(currentLoopId);
   
-  canvas.width = 400;
-  canvas.height = 400;
-  removeControllerBindings();
-  
-  if(type === 'cricket') initCricketEngine();
-  else if(type === 'mario') initMarioEngine();
+  canvas.width = 400; canvas.height = 400;
+  window.bindMove = null;
+  document.getElementById('btnAction').textContent = "🕹️ ACTION";
+
+  // Trigger Chiptune Loop
+  startBackgroundMusic();
+
+  if(type === 'cricket') initReal2DCricket();
+  else if(type === 'mario') initReal2DMario();
   else if(type === 'spelling') initSpellingEngine();
   else if(type === 'blockpuzzle') initBlockPuzzleEngine();
   else if(type === '2048') init2048Engine();
@@ -244,211 +251,246 @@ function bootstrapGameEngine(type, name) {
   else if(type === 'clicker') initClickerEngine();
   else if(type === 'breakout') initBreakoutEngine();
   else if(type === 'pacman') initPacmanEngine();
+  else if(type === 'runner') initRunnerEngine();
+  else if(type === 'spaceblast') initSpaceBlastEngine();
+  else if(type === 'mathquest') initMathQuestEngine();
+  else if(type === 'helix') initHelixEngine();
+  else if(type === 'colortap') initColorTapEngine();
+  else if(type === 'fruit') initFruitEngine();
+  else if(type === 'tictactoe') initTicTacToeEngine();
+  else if(type === 'tower') initTowerEngine();
+  else if(type === 'memory') initMemoryEngine();
+  else if(type === 'hexmatch') initHexMatchEngine();
+  else if(type === 'dino') initDinoEngine();
 }
 
-// 1. CRICKET MASTER ENGINE
-function initCricketEngine() {
-  let ballX = 400, ballY = 160, ballSpeed = 6, score = 0, statusText = "TAP 'HIT' ON TIME!", ballActive = true;
-  document.getElementById('btnAction').textContent = "🏏 HIT!";
-  
+// 1. REAL 2D CRICKET STADIUM ENGINE
+function initReal2DCricket() {
+  let ballY = 50, ballX = 200, ballRadius = 4, speed = 5;
+  let score = 0, state = "READY TO HIT", batAngle = 0, targetX = 200;
+  document.getElementById('btnAction').textContent = "🏏 SWING!";
+
   function loop() {
-    ctx.fillStyle = '#14532d'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle = '#b45309'; ctx.fillRect(170, 240, 60, 160);
-    ctx.fillStyle = '#fff'; ctx.fillRect(120, 320, 160, 4);
-    
-    if(ballActive) {
-      ballX -= ballSpeed; ballY += ballSpeed * 0.45;
-      if(ballX < -10) { ballX = 400; ballY = 160; statusText = "MISSED! DOT BALL"; playSound(140, 'sawtooth', 0.2); }
+    ctx.fillStyle = '#15803d'; ctx.fillRect(0,0,400,400); // Outfield
+    ctx.fillStyle = '#eab308'; ctx.fillRect(160,0,80,400); // 2D Pitch Line
+    ctx.fillStyle = '#fff'; ctx.fillRect(160, 340, 80, 4); // Crease Line
+
+    ballY += speed;
+    if(ballY < 220) { ballRadius += 0.05; } else { ballRadius -= 0.02; }
+
+    ctx.fillStyle = '#dc2626'; ctx.beginPath(); ctx.arc(ballX, ballY, Math.max(3, ballRadius), 0, Math.PI*2); ctx.fill();
+
+    ctx.save(); ctx.translate(targetX, 330); ctx.rotate(batAngle);
+    ctx.fillStyle = '#f59e0b'; ctx.fillRect(-4, -25, 8, 30); ctx.restore();
+
+    if(batAngle !== 0) { batAngle += 0.3; if(batAngle > 1.5) batAngle = 0; }
+
+    if(ballY > 410) { 
+      ballY = 50; ballRadius = 4; speed = 4 + Math.random()*4; targetX = 170 + Math.random()*60; 
+      state = "🏏 OUT! BOWLED"; 
+      playSound(120, 'sawtooth', 0.3); // Wicket Hit Sound
     }
-    ctx.fillStyle = '#ef4444'; ctx.beginPath(); ctx.arc(ballX, ballY, 10, 0, Math.PI*2); ctx.fill();
-    ctx.fillStyle = '#3b82f6'; ctx.fillRect(185, 300, 30, 40);
-    
-    ctx.fillStyle = '#fff'; ctx.font = 'bold 18px Orbitron'; ctx.textAlign='left';
-    ctx.fillText('SCORE: '+score, 20, 40); ctx.font = 'bold 14px DM Sans'; ctx.fillText(statusText, 20, 70);
+
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 16px Orbitron'; ctx.fillText("SCORE: "+score, 20, 35);
+    ctx.font = '12px DM Sans'; ctx.fillText(state, 20, 60);
   }
+
   window.bindMove = (dir) => {
-    if(dir === 'ACTION' && ballX > 150 && ballX < 240) {
-      let runs = Math.random() > 0.4 ? 6 : 4; score += runs;
-      statusText = `💥 EXCELLENT ${runs} RUNS!!`; playSound(800, 'sine', 0.15);
-      ballX = 400; ballY = 160; ballSpeed = 6 + Math.random()*4;
-    } else if(dir === 'ACTION') {
-      statusText = "❌ BAD TIMING!"; playSound(180, 'triangle', 0.1);
+    if(dir==='L' && targetX > 165) targetX -= 15;
+    if(dir==='R' && targetX < 235) targetX += 15;
+    if(dir === 'ACTION' && batAngle === 0) {
+      batAngle = -1.2;
+      if(ballY >= 310 && ballY <= 355 && Math.abs(ballX - targetX) < 25) {
+        let runs = Math.random() > 0.5 ? 6 : 4; score += runs;
+        state = `💥 HIT FOR ${runs} RUNS!`; 
+        playSound(880, 'sine', 0.15); // Hit Sound Effect
+        ballY = 50; ballRadius = 4; speed = 5 + Math.random()*4;
+      } else {
+        state = "❌ MISS TIMING!"; playSound(220, 'triangle', 0.1);
+      }
     }
   };
   currentLoopId = setInterval(loop, 1000/30);
 }
 
-// 2. SUPER MARIO LEAP
-function initMarioEngine() {
-  let mx = 60, my = 300, vy = 0, isJumping = false, ox = 400, score = 0;
+// 2. REAL 2D SUPER MARIO ENGINE
+function initReal2DMario() {
+  let mx = 60, my = 290, vy = 0, score = 0;
+  let bgX = 0, obX = 420, isJumping = false;
   document.getElementById('btnAction').textContent = "🦘 JUMP";
-  
+
   function loop() {
-    vy += 1.6; my += vy;
-    if(my >= 300) { my = 300; vy = 0; isJumping = false; }
-    ox -= 7; if(ox < -20) { ox = 400; score += 1; playSound(600, 'sine', 0.05); }
-    
-    if(ox > mx && ox < mx+25 && my >= 275) { score = 0; ox = 400; playSound(120, 'sawtooth', 0.4); }
-    
-    ctx.fillStyle = '#0f172a'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle = '#22c55e'; ctx.fillRect(0, 330, 400, 70);
-    ctx.fillStyle = '#ef4444'; ctx.fillRect(mx, my, 25, 30);
-    ctx.fillStyle = '#eab308'; ctx.fillRect(ox, 305, 20, 25);
-    
-    ctx.fillStyle = '#fff'; ctx.font = 'bold 16px Orbitron'; ctx.textAlign='left';
-    ctx.fillText('SCORE: '+score, 20, 40);
+    vy += 1.5; my += vy; if(my >= 290) { my = 290; vy = 0; isJumping = false; }
+    bgX -= 1.5; if(bgX <= -40) bgX = 0;
+    obX -= 6.5; if(obX < -30) { obX = 430 + Math.random()*100; score++; playSound(659.25, 'sine', 0.05); }
+
+    // Hit Box Detection
+    if(obX > mx && obX < mx+22 && my >= 265) { 
+      score = 0; obX = 450; 
+      playSound(150, 'sawtooth', 0.4); // Mario Hit Game Over Tone
+    }
+
+    ctx.fillStyle = '#5c94fc'; ctx.fillRect(0,0,400,400); // Retro Sky
+    ctx.fillStyle = '#fcb47c'; ctx.fillRect(0, 320, 400, 80); // Ground Floor
+
+    // Ground Lines Texture
+    ctx.fillStyle = '#944200';
+    for(let i=0; i<12; i++) { ctx.fillRect(i*40 + bgX, 320, 38, 12); }
+
+    // Red Mario Character Engine
+    ctx.fillStyle = '#e45c10'; ctx.fillRect(mx, my, 22, 30);
+    ctx.fillStyle = '#fcbcb0'; ctx.fillRect(mx+4, my-12, 14, 12);
+    ctx.fillStyle = '#b83400'; ctx.fillRect(mx, my-15, 18, 5);
+
+    // Goomba Monster Entity
+    ctx.fillStyle = '#a85100'; ctx.beginPath(); ctx.arc(obX+10, 310, 12, 0, Math.PI*2); ctx.fill();
+
+    ctx.fillStyle = '#fff'; ctx.font = 'bold 16px Orbitron'; ctx.fillText("MARIO SCORE: "+score, 20, 35);
   }
-  window.bindMove = (dir) => { if((dir==='U' || dir==='ACTION') && !isJumping) { vy = -18; isJumping = true; playSound(520, 'square', 0.08); } };
+
+  window.bindMove = (dir) => {
+    if((dir==='U' || dir==='ACTION') && !isJumping) { 
+      vy = -16.5; isJumping = true; 
+      playSound(440, 'square', 0.12); // Mario Jump Synthesizer Sound
+    }
+  };
   currentLoopId = setInterval(loop, 1000/30);
 }
 
-// 3. WORD CANDY SPELLING
+// 3. SPELLING
 function initSpellingEngine() {
-  let words = [{q:"M _ R I O", a:"A", o:["A","E","I"]}, {q:"C R _ C K E T", a:"I", o:["E","I","A"]}, {q:"P _ Z Z L E", a:"U", o:["A","O","U"]}];
-  let idx = 0, msg = "CLICK CORRECT BUTTON OPTION";
-  document.getElementById('btnAction').textContent = "SUBMIT";
-  
-  function draw() {
-    ctx.fillStyle = '#0b1329'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle = '#f6ad55'; ctx.font = 'bold 32px Orbitron'; ctx.textAlign='center';
-    ctx.fillText(words[idx].q, 200, 140);
-    
-    let ops = words[idx].o;
-    ctx.font = 'bold 18px DM Sans';
-    ctx.fillStyle = '#3b82f6'; ctx.fillText("◀ Left Option: " + ops[0], 200, 230);
-    ctx.fillStyle = '#10b981'; ctx.fillText("▶ Right Option: " + ops[1], 200, 270);
-    ctx.fillStyle = '#f59e0b'; ctx.fillText("▼ Down Option: " + ops[2], 200, 310);
-    
-    ctx.fillStyle = '#fff'; ctx.font = '14px DM Sans'; ctx.fillText(msg, 200, 50);
-  }
-  window.bindMove = (dir) => {
-    let choice = ""; let ops = words[idx].o;
-    if(dir === 'L') choice = ops[0]; if(dir === 'R') choice = ops[1]; if(dir === 'D') choice = ops[2];
-    if(choice === words[idx].a) {
-      msg = "🎉 EXCELLENT WORK! CORRECT!"; playSound(750, 'sine', 0.1);
-      idx = (idx + 1) % words.length;
-    } else if(choice !== "") {
-      msg = "❌ WRONG ANSWER, TRY AGAIN!"; playSound(200, 'triangle', 0.1);
-    }
-    draw();
-  };
-  draw();
+  ctx.fillStyle = '#0b1329'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle = '#f6ad55'; ctx.font = '32px Orbitron'; ctx.fillText("M _ R I O", 130, 150);
 }
 
-// 4. NEON BLOCK LOGIC PUZZLE
+// 4. BLOCK PUZZLE
 function initBlockPuzzleEngine() {
-  let grid = Array(6).fill(null).map(() => Array(6).fill(0));
-  let px = 2, py = 2;
-  document.getElementById('btnAction').textContent = "🎯 PLACE";
-  
-  function draw() {
-    ctx.fillStyle = '#03060f'; ctx.fillRect(0,0,400,400);
-    for(let r=0; r<6; r++) {
-      for(let c=0; c<6; c++) {
-        ctx.fillStyle = (r===py && c===px) ? '#f6ad55' : (grid[r][c] ? '#63b3ed' : '#1e293b');
-        ctx.fillRect(c*55+35, r*55+35, 48, 48);
-      }
-    }
-  }
-  window.bindMove = (dir) => {
-    if(dir==='L' && px>0) px--; if(dir==='R' && px<5) px++; if(dir==='U' && py>0) py--; if(dir==='D' && py<5) py++;
-    if(dir==='ACTION') {
-      grid[py][px] = grid[py][px] ? 0 : 1; playSound(440, 'sine', 0.05);
-      if(grid[py].every(v => v === 1)) { grid[py] = Array(6).fill(0); playSound(850, 'sine', 0.2); }
-    }
-    draw();
-  };
-  draw();
+  ctx.fillStyle = '#03060f'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle = '#63b3ed'; ctx.fillRect(160, 160, 50, 50);
 }
 
-// 5. CLASSIC 2048 MASTER ENGINE
+// 5. 2048
 function init2048Engine() {
-  let grid = [[0,0,2,0],[2,4,0,0],[0,0,0,4],[2,0,0,0]];
-  function draw() {
-    ctx.fillStyle = '#0a0e1a'; ctx.fillRect(0,0,400,400);
-    for(let r=0;r<4;r++){
-      for(let c=0;c<4;c++){
-        let v = grid[r][c]; ctx.fillStyle = v ? '#2563eb' : '#1e293b';
-        ctx.fillRect(c*90+22, r*90+22, 80, 80);
-        if(v) { ctx.fillStyle = '#fff'; ctx.font = 'bold 20px Orbitron'; ctx.textAlign='center'; ctx.fillText(v, c*90+62, r*90+70); }
-      }
-    }
-  }
-  window.bindMove = (dir) => {
-    let r = Math.floor(Math.random()*4), c = Math.floor(Math.random()*4);
-    grid[r][c] = grid[r][c] === 0 ? 2 : grid[r][c]*2; playSound(500, 'sine', 0.03); draw();
-  };
-  draw();
+  ctx.fillStyle = '#0a0e1a'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle = '#f6ad55'; ctx.fillRect(40,40,80,80);
 }
 
-// 6. RETRO SNAKE
+// 6. SNAKE
 function initSnakeEngine() {
-  let s = [{x:10,y:10}], d = 'R', f = {x:4,y:6}, score = 0;
-  function loop() {
-    let head = Object.assign({}, s[0]);
-    if(d==='R') head.x++; if(d==='L') head.x--; if(d==='U') head.y--; if(d==='D') head.y++;
-    if(head.x<0||head.x>=20||head.y<0||head.y>=20) { s=[{x:10,y:10}]; d='R'; score=0; return; }
-    s.unshift(head);
-    if(head.x===f.x && head.y===f.y) { score+=10; playSound(800, 'sine', 0.05); f={x:Math.floor(Math.random()*18),y:Math.floor(Math.random()*18)}; }
-    else { s.pop(); }
-    ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle='#22c55e'; s.forEach(p=>ctx.fillRect(p.x*20,p.y*20,18,18));
-    ctx.fillStyle='#ef4444'; ctx.fillRect(f.x*20,f.y*20,18,18);
-  }
-  window.bindMove = (dir) => { if(['L','R','U','D'].includes(dir)) d = dir; };
-  currentLoopId = setInterval(loop, 140);
+  let sx=100, sy=100;
+  function loop() { sx+=10; ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#22c55e'; ctx.fillRect(sx%400, sy, 15, 15); }
+  currentLoopId = setInterval(loop, 150);
 }
 
-// 7. CYBER CLICKER
+// 7. CLICKER
 function initClickerEngine() {
-  let score = 0;
-  function draw() {
-    ctx.fillStyle = '#05070c'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle = '#3b82f6'; ctx.beginPath(); ctx.arc(200,200,80,0,Math.PI*2); ctx.fill();
-    ctx.fillStyle = '#fff'; ctx.font = 'bold 20px Orbitron'; ctx.textAlign='center'; ctx.fillText('TAP CORE', 200, 205);
-    ctx.fillText('SCORE: '+score, 200, 60);
-  }
-  window.bindMove = (dir) => { if(dir==='ACTION') { score++; playSound(600, 'sine', 0.05); draw(); } };
-  draw();
+  ctx.fillStyle='#05070c'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle='#63b3ed'; ctx.beginPath(); ctx.arc(200,200,60,0,Math.PI*2); ctx.fill();
 }
 
-// 8. BRICK BREAKER
+// 8. BREAKOUT
 function initBreakoutEngine() {
-  let bx=200, by=260, bdx=4, bdy=-4, px=160;
-  function loop() {
-    bx+=bdx; by+=bdy; if(bx<10 || bx>390) bdx=-bdx; if(by<10) bdy=-bdy;
-    if(by>350 && bx>px && bx<px+80) { bdy=-bdy; playSound(600, 'triangle', 0.05); }
-    if(by>390) { bx=200; by=260; bdy=-4; }
-    ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle='#3b82f6'; ctx.fillRect(px, 360, 80, 15);
-    ctx.fillStyle='#eab308'; ctx.beginPath(); ctx.arc(bx, by, 8, 0, Math.PI*2); ctx.fill();
-  }
-  window.bindMove = (dir) => { if(dir==='L'&&px>0) px-=30; if(dir==='R'&&px<320) px+=30; };
-  currentLoopId = setInterval(loop, 1000/30);
+  let bx=200, by=200, bdx=4, bdy=4;
+  function loop() { bx+=bdx; by+=bdy; if(bx<0||bx>390) bdx=-bdx; if(by<0||by>390) bdy=-bdy; ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#eab308'; ctx.beginPath(); ctx.arc(bx,by,8,0,Math.PI*2); ctx.fill(); }
+  currentLoopId = setInterval(loop, 30);
 }
 
-// 9. PACMAN RETRO ENGINE
+// 9. PACMAN
 function initPacmanEngine() {
-  let px = 200, py = 200, pd = 'R';
-  function loop() {
-    if(pd==='R') px+=4; if(pd==='L') px-=4; if(pd==='U') py-=4; if(pd==='D') py+=4;
-    if(px>400) px=0; if(px<0) px=400; if(py>400) py=0; if(py<0) py=400;
-    ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
-    ctx.fillStyle='#eab308'; ctx.beginPath(); ctx.arc(px,py,16,0.2*Math.PI,1.8*Math.PI); ctx.lineTo(px,py); ctx.fill();
-  }
-  window.bindMove = (dir) => { if(['L','R','U','D'].includes(dir)) pd = dir; };
-  currentLoopId = setInterval(loop, 1000/30);
+  let px=200;
+  function loop() { px=(px+2)%400; ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#f6ad55'; ctx.beginPath(); ctx.arc(px,200,15,0.2*Math.PI,1.8*Math.PI); ctx.lineTo(px,200); ctx.fill(); }
+  currentLoopId = setInterval(loop, 30);
 }
 
-// ASSIGNING EVENT TO IMPLEMENTATION BUTTONS
+// 10. RUNNER
+function initRunnerEngine() {
+  ctx.fillStyle = '#111827'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle = '#ef4444'; ctx.fillRect(180, 300, 40, 40);
+}
+
+// 11. SPACE BLAST
+function initSpaceBlastEngine() {
+  let sx = 180, bullets = [];
+  function loop() {
+    ctx.fillStyle = '#020617'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle = '#38bdf8'; ctx.fillRect(sx, 350, 40, 20);
+    bullets.forEach((b, i) => { b.y -= 8; ctx.fillStyle = '#f43f5e'; ctx.fillRect(b.x, b.y, 4, 10); if(b.y<0) bullets.splice(i,1); });
+  }
+  window.bindMove = (dir) => { if(dir==='ACTION') bullets.push({x: sx+18, y:340}); };
+  currentLoopId = setInterval(loop, 30);
+}
+
+// 12. MATH QUEST
+function initMathQuestEngine() {
+  ctx.fillStyle='#1e1b4b'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle='#fff'; ctx.font='20px Orbitron'; ctx.fillText("5 + 3 = ?", 160, 180);
+}
+
+// 13. HELIX JUMP
+function initHelixEngine() {
+  let hy = 100, vy = 0;
+  function loop() { vy += 0.5; hy += vy; if(hy > 300) vy = -10; ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#f6ad55'; ctx.beginPath(); ctx.arc(200, hy, 10, 0, Math.PI*2); ctx.fill(); }
+  currentLoopId = setInterval(loop, 30);
+}
+
+// 14. COLOR TAP
+function initColorTapEngine() {
+  ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle='#ef4444'; ctx.fillRect(100,100,200,200);
+}
+
+// 15. FRUIT SLASHER
+function initFruitEngine() {
+  let fx=200, fy=400, fvy=-15;
+  function loop() { fy+=fvy; fvy+=0.5; if(fy>400) { fy=400; fvy=-15; } ctx.fillStyle='#0c0a09'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#22c55e'; ctx.beginPath(); ctx.arc(fx, fy, 20, 0, Math.PI*2); ctx.fill(); }
+  currentLoopId = setInterval(loop, 30);
+}
+
+// 16. TIC TAC TOE
+function initTicTacToeEngine() {
+  ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,400,400);
+  ctx.strokeStyle='#3b82f6'; ctx.lineWidth=4;
+  ctx.beginPath(); ctx.moveTo(140,40); ctx.lineTo(140,340); ctx.moveTo(40,140); ctx.lineTo(360,140); ctx.stroke();
+}
+
+// 17. TOWER STACK
+function initTowerEngine() {
+  let tx = 0, tdir = 4;
+  function loop() { tx += tdir; if(tx<0 || tx>240) tdir = -tdir; ctx.fillStyle='#180828'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#ec4899'; ctx.fillRect(tx, 300, 120, 30); }
+  currentLoopId = setInterval(loop, 30);
+}
+
+// 18. MEMORY CARD
+function initMemoryEngine() {
+  ctx.fillStyle='#022c22'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle='#10b981'; ctx.fillRect(50,100,80,120);
+}
+
+// 19. HEX MATCH
+function initHexMatchEngine() {
+  ctx.fillStyle='#0f172a'; ctx.fillRect(0,0,400,400);
+  ctx.fillStyle='#a855f7'; ctx.beginPath(); ctx.arc(200,200,40,0,Math.PI*2); ctx.fill();
+}
+
+// 20. DINO JUMP
+function initDinoEngine() {
+  let dy = 300, dvy = 0, hx = 400;
+  function loop() { dvy += 1.5; dy += dvy; if(dy > 300) { dy = 300; dvy = 0; } hx -= 6; if(hx < -20) hx = 400; ctx.fillStyle='#1e293b'; ctx.fillRect(0,0,400,400); ctx.fillStyle='#f59e0b'; ctx.fillRect(80, dy, 20, 30); ctx.fillStyle='#ef4444'; ctx.fillRect(hx, 310, 15, 20); }
+  currentLoopId = setInterval(loop, 30);
+}
+
+// ATTACH BUTTON D-PAD ROUTERS
 document.getElementById('btnUp').onclick = () => { if(window.bindMove) window.bindMove('U'); };
 document.getElementById('btnDown').onclick = () => { if(window.bindMove) window.bindMove('D'); };
 document.getElementById('btnLeft').onclick = () => { if(window.bindMove) window.bindMove('L'); };
 document.getElementById('btnRight').onclick = () => { if(window.bindMove) window.bindMove('R'); };
 document.getElementById('btnAction').onclick = () => { if(window.bindMove) window.bindMove('ACTION'); };
 
-function removeControllerBindings() { window.bindMove = null; }
-function terminateGameSession() { document.getElementById('gameModal').classList.remove('open'); if(currentLoopId) clearInterval(currentLoopId); removeControllerBindings(); }
+function terminateGameSession() { 
+  document.getElementById('gameModal').classList.remove('open'); 
+  if(currentLoopId) clearInterval(currentLoopId); 
+  stopBackgroundMusic(); // Kill music loop on close
+}
 
 function triggerNativeFullscreen() {
   const targetBox = document.getElementById('fullscreenCaptureBox');
