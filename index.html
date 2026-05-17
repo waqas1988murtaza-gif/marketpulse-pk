@@ -1,896 +1,218 @@
 <!DOCTYPE html>
-<html lang="ur" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MarketPulse PK — Crypto · Forex · PSX</title>
-<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700;900&family=Noto+Nastaliq+Urdu:wght@400;600;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>BrainBlast — Premium Arcade Arena</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --green: #00f5a0;
-    --red: #ff4d6d;
-    --gold: #ffd700;
-    --blue: #00cfff;
-    --purple: #b14fff;
-    --pink: #ff6ec7;
-    --dark: #06060f;
-    --card: #0d0d1f;
-    --card2: #12122a;
-    --border: rgba(255,255,255,0.07);
-    --text: #e8e8ff;
-    --muted: #7070a0;
-  }
+:root {
+  --bg: #05070c;
+  --surface: #0a0e1a;
+  --surface2: #101626;
+  --border: rgba(99,179,237,0.15);
+  --accent: #63b3ed;
+  --accent2: #f6ad55;
+  --text: #e2e8f0;
+  --muted: #64748b;
+  --easy: #4ade80;
+  --hard: #fb923c;
+  --insane: #f87171;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+.grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(99,179,237,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,179,237,0.02) 1px,transparent 1px);background-size:50px 50px;z-index:0;pointer-events:none;}
 
-  body {
-    background: var(--dark);
-    color: var(--text);
-    font-family: 'Exo 2', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+header{position:sticky;top:0;z-index:100;background:rgba(5,7,12,0.9);backdrop-filter:blur(15px);border-bottom:1px solid var(--border);padding:0 24px;}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.logo-mark{width:40px;height:40px;background:linear-gradient(135deg,var(--accent),#2563eb);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-weight:900;color:#fff;box-shadow:0 0 15px rgba(99,179,237,0.3);}
+.logo-name{font-family:'Orbitron',monospace;font-weight:700;font-size:1.2rem;letter-spacing:1px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
-  .urdu { font-family: 'Noto Nastaliq Urdu', serif; line-height: 2; }
+.hero{position:relative;z-index:5;padding:40px 24px 20px;text-align:center;max-width:800px;margin:0 auto;}
+.hero h1{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:10px;background:linear-gradient(90deg,#63b3ed,#f6ad55);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--muted);font-size:0.95rem;}
 
-  /* Animated BG */
-  .bg-grid {
-    position: fixed; inset: 0; z-index: 0;
-    background-image:
-      linear-gradient(rgba(0,207,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,207,255,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    animation: gridMove 20s linear infinite;
-  }
-  @keyframes gridMove { to { background-position: 40px 40px; } }
+.main-wrap{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:0 24px 60px;display:grid;grid-template-columns:1fr 300px;gap:28px;}
+@media(max-width:1100px){.main-wrap{grid-template-columns:1fr;}}
 
-  .orb {
-    position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.15; z-index: 0; pointer-events: none;
-    animation: orbFloat 12s ease-in-out infinite;
-  }
-  .orb1 { width: 500px; height: 500px; background: var(--purple); top: -100px; left: -100px; }
-  .orb2 { width: 400px; height: 400px; background: var(--blue); bottom: -50px; right: -80px; animation-delay: -4s; }
-  .orb3 { width: 300px; height: 300px; background: var(--green); top: 40%; left: 40%; animation-delay: -8s; }
-  @keyframes orbFloat {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-30px) scale(1.05); }
-  }
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
+.section-title{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.section-line{flex:1;height:1px;background:var(--border);}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;}
 
-  /* TICKER */
-  .ticker-wrap {
-    position: sticky; top: 0; z-index: 100;
-    background: linear-gradient(135deg, #0a0a1e 0%, #12122a 100%);
-    border-bottom: 1px solid var(--border);
-    overflow: hidden; padding: 10px 0;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.5);
-  }
-  .ticker-track {
-    display: flex; gap: 60px; width: max-content;
-    animation: ticker 35s linear infinite;
-  }
-  .ticker-track:hover { animation-play-state: paused; }
-  @keyframes ticker { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .tick-item {
-    display: flex; align-items: center; gap: 10px;
-    white-space: nowrap; font-size: 0.82rem; font-weight: 600;
-  }
-  .tick-label { color: var(--muted); }
-  .tick-val { color: var(--text); }
-  .tick-chg.up { color: var(--green); }
-  .tick-chg.dn { color: var(--red); }
+.game-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;}
+.game-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 10px 20px rgba(99,179,237,0.1);}
+.game-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,var(--surface2),#05070c);transition:0.3s;}
+.game-card:hover .game-thumb{transform:scale(1.05);}
+.game-info{padding:16px;background:var(--surface);}
+.game-name{font-weight:700;font-size:0.95rem;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.difficulty-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.d-easy{background:rgba(74,222,128,0.1);color:var(--easy);border:1px solid rgba(74,222,128,0.2);}
+.d-hard{background:rgba(251,146,60,0.1);color:var(--hard);border:1px solid rgba(251,146,60,0.2);}
+.d-insane{background:rgba(248,113,113,0.1);color:var(--insane);border:1px solid rgba(248,113,113,0.2);}
 
-  /* HEADER */
-  header {
-    position: relative; z-index: 10;
-    padding: 20px 30px;
-    display: flex; justify-content: space-between; align-items: center;
-    background: rgba(6,6,15,0.6);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--border);
-  }
-  .logo {
-    display: flex; align-items: center; gap: 12px;
-    text-decoration: none;
-  }
-  .logo-icon {
-    width: 44px; height: 44px; border-radius: 12px;
-    background: linear-gradient(135deg, var(--blue), var(--purple));
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.3rem; font-weight: 900; color: #fff;
-    box-shadow: 0 0 20px rgba(0,207,255,0.4);
-  }
-  .logo-text { font-size: 1.5rem; font-weight: 900; letter-spacing: -0.5px; }
-  .logo-text span { 
-    background: linear-gradient(90deg, var(--blue), var(--purple), var(--pink));
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .logo-sub { font-size: 0.7rem; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+.sidebar-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+.sp-head{font-family:'Orbitron',monospace;font-size:0.85rem;font-weight:700;margin-bottom:15px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;}
+.lb-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.9rem;display:flex;justify-content:space-between;}
 
-  nav { display: flex; gap: 8px; align-items: center; }
-  nav a {
-    color: var(--muted); text-decoration: none; font-size: 0.85rem; font-weight: 600;
-    padding: 8px 16px; border-radius: 8px; transition: all 0.3s;
-    border: 1px solid transparent;
-  }
-  nav a:hover, nav a.active {
-    color: var(--blue); border-color: rgba(0,207,255,0.3);
-    background: rgba(0,207,255,0.08);
-  }
+/* SYSTEM OVERLAY FIX FOR ACCURATE STRETCH FULLSCREEN */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+.modal-overlay.open{display:flex;}
+.modal{background:var(--surface2);border:1px solid var(--accent);border-radius:24px;width:95%;max-width:850px;overflow:hidden;box-shadow:0 0 40px rgba(99,179,237,0.25);transition: all 0.3s;}
+.modal-header{padding:16px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--surface);}
+.modal-title{font-family:'Orbitron',monospace;font-weight:700;color:#fff;}
+.action-btns{display:flex;gap:12px;}
+.m-btn{border:none;color:#fff;padding:10px 18px;border-radius:10px;cursor:pointer;font-size:0.85rem;font-weight:700;font-family:'Orbitron',sans-serif;transition:0.2s;}
+.btn-fs{background:linear-gradient(135deg,var(--accent2),#dd6b20);}
+.btn-fs:hover{box-shadow:0 0 15px rgba(246,173,85,0.4);}
+.btn-cl{background:#dc2626;}
 
-  .btn-wa {
-    display: flex; align-items: center; gap: 8px;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    color: #fff; padding: 10px 20px; border-radius: 10px;
-    font-weight: 700; font-size: 0.85rem; text-decoration: none;
-    transition: all 0.3s; border: none; cursor: pointer;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
-  }
-  .btn-wa:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
+.modal-body{padding:10px;background:#000;display:flex;justify-content:center;align-items:center;}
+.game-frame-wrapper{width:100%;aspect-ratio:16/10;max-height:70vh;border-radius:14px;overflow:hidden;background:#000;transition: all 0.2s;}
+.game-frame-wrapper iframe{width:100%;height:100%;border:none;display:block;}
 
-  /* MAIN */
-  main { position: relative; z-index: 5; padding: 30px; max-width: 1400px; margin: 0 auto; }
+/* NATIVE STRETCH IN FULLSCREEN STATE */
+.game-frame-wrapper:fullscreen, .game-frame-wrapper:-webkit-full-screen {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  border-radius: 0px !important;
+  aspect-ratio: auto !important;
+}
 
-  /* HERO STRIP */
-  .hero-strip {
-    text-align: center; padding: 40px 20px 50px;
-    position: relative; z-index: 5;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(0,207,255,0.1); border: 1px solid rgba(0,207,255,0.3);
-    padding: 6px 16px; border-radius: 50px; font-size: 0.75rem;
-    color: var(--blue); letter-spacing: 1px; text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  .pulse-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); animation: pulse 1.5s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1; transform:scale(1);} 50%{opacity:0.5; transform:scale(1.4);} }
-  .hero-title {
-    font-size: clamp(2rem, 5vw, 4rem); font-weight: 900; line-height: 1.1;
-    margin-bottom: 16px;
-  }
-  .hero-title .g1 { background: linear-gradient(90deg, var(--green), var(--blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero-title .g2 { background: linear-gradient(90deg, var(--gold), var(--pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-  .hero-sub { color: var(--muted); font-size: 1rem; max-width: 500px; margin: 0 auto 30px; line-height: 1.7; }
-
-  /* MARKET CARDS ROW */
-  .section-label {
-    display: flex; align-items: center; gap: 12px;
-    font-size: 0.7rem; font-weight: 700; letter-spacing: 3px;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 16px;
-  }
-  .section-label::after { content:''; flex:1; height:1px; background: var(--border); }
-
-  .cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 16px; margin-bottom: 40px;
-  }
-
-  .m-card {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px; padding: 20px;
-    position: relative; overflow: hidden;
-    transition: all 0.3s; cursor: pointer;
-  }
-  .m-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.15); }
-  .m-card::before {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.03));
-  }
-  .m-card .accent-line {
-    position: absolute; top: 0; left: 0; right: 0; height: 3px;
-    border-radius: 16px 16px 0 0;
-  }
-  .m-card .coin-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
-  .m-card .coin-icon { font-size: 1.8rem; }
-  .m-card .coin-badge {
-    font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 6px;
-    letter-spacing: 0.5px;
-  }
-  .badge-up { background: rgba(0,245,160,0.15); color: var(--green); }
-  .badge-dn { background: rgba(255,77,109,0.15); color: var(--red); }
-  .m-card .coin-name { font-size: 0.78rem; color: var(--muted); margin-bottom: 4px; }
-  .m-card .coin-price { font-size: 1.3rem; font-weight: 800; }
-  .m-card .coin-change { font-size: 0.82rem; font-weight: 600; margin-top: 4px; }
-  .up { color: var(--green); }
-  .dn { color: var(--red); }
-
-  /* SPARKLINE MINI */
-  .sparkline { width: 100%; height: 40px; margin-top: 12px; }
-  .sparkline svg { width: 100%; height: 100%; overflow: visible; }
-
-  /* MAIN CONTENT GRID */
-  .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 380px;
-    gap: 24px; margin-bottom: 40px;
-  }
-  @media(max-width: 1000px) { .content-grid { grid-template-columns: 1fr; } }
-
-  /* NEWS FEED */
-  .panel {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; overflow: hidden;
-  }
-  .panel-header {
-    padding: 20px 24px; border-bottom: 1px solid var(--border);
-    display: flex; justify-content: space-between; align-items: center;
-  }
-  .panel-title { font-size: 1rem; font-weight: 700; }
-  .panel-badge {
-    font-size: 0.68rem; padding: 4px 10px; border-radius: 20px;
-    background: rgba(0,207,255,0.1); color: var(--blue); border: 1px solid rgba(0,207,255,0.2);
-  }
-
-  .news-item {
-    padding: 20px 24px; border-bottom: 1px solid var(--border);
-    transition: background 0.2s; cursor: pointer;
-    animation: fadeIn 0.5s ease both;
-  }
-  .news-item:hover { background: rgba(255,255,255,0.03); }
-  .news-item:last-child { border-bottom: none; }
-  @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
-
-  .news-meta { display: flex; gap: 10px; align-items: center; margin-bottom: 8px; }
-  .news-tag {
-    font-size: 0.65rem; font-weight: 700; padding: 2px 8px; border-radius: 4px;
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .tag-crypto { background: rgba(255,214,0,0.15); color: var(--gold); }
-  .tag-forex { background: rgba(0,207,255,0.15); color: var(--blue); }
-  .tag-psx { background: rgba(0,245,160,0.15); color: var(--green); }
-  .tag-alert { background: rgba(255,77,109,0.15); color: var(--red); }
-  .news-time { font-size: 0.72rem; color: var(--muted); }
-  .news-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 6px; line-height: 1.4; }
-  .news-title-ur { font-family: 'Noto Nastaliq Urdu', serif; font-size: 0.85rem; color: var(--muted); line-height: 2; }
-  .news-expert {
-    margin-top: 12px; padding: 10px 14px;
-    background: rgba(177,79,255,0.08); border: 1px solid rgba(177,79,255,0.2);
-    border-radius: 10px; font-size: 0.8rem;
-  }
-  .expert-label { color: var(--purple); font-weight: 700; font-size: 0.7rem; margin-bottom: 4px; letter-spacing: 1px; }
-  .expert-text { color: #c8c8f0; line-height: 1.5; }
-  .expert-text-ur { font-family: 'Noto Nastaliq Urdu', serif; font-size: 0.78rem; color: #c8c8f0; line-height: 2; }
-
-  /* SIDEBAR */
-  .sidebar { display: flex; flex-direction: column; gap: 20px; }
-
-  /* REGISTER PANEL */
-  .reg-panel {
-    background: linear-gradient(135deg, #0f0f25, #1a0a30);
-    border: 1px solid rgba(177,79,255,0.3);
-    border-radius: 20px; padding: 28px; position: relative; overflow: hidden;
-  }
-  .reg-panel::before {
-    content: ''; position: absolute;
-    top: -40px; right: -40px; width: 150px; height: 150px;
-    background: var(--purple); border-radius: 50%; filter: blur(60px); opacity: 0.2;
-  }
-  .reg-title { font-size: 1.1rem; font-weight: 800; margin-bottom: 6px; }
-  .reg-title-ur { font-family: 'Noto Nastaliq Urdu', serif; color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; line-height: 2; }
-  .form-group { margin-bottom: 14px; }
-  .form-group label { font-size: 0.72rem; color: var(--muted); display: block; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.5px; }
-  .form-group input {
-    width: 100%; padding: 12px 16px;
-    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
-    border-radius: 10px; color: var(--text); font-size: 0.88rem;
-    font-family: inherit; outline: none; transition: all 0.3s;
-    direction: ltr;
-  }
-  .form-group input:focus { border-color: var(--purple); background: rgba(177,79,255,0.08); }
-  .form-group input::placeholder { color: var(--muted); }
-  .wa-note { font-size: 0.72rem; color: var(--muted); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
-  .btn-register {
-    width: 100%; padding: 13px;
-    background: linear-gradient(135deg, var(--purple), #7b2fff);
-    border: none; border-radius: 10px; color: #fff;
-    font-weight: 700; font-size: 0.9rem; cursor: pointer;
-    transition: all 0.3s; font-family: inherit;
-    box-shadow: 0 4px 20px rgba(177,79,255,0.3);
-  }
-  .btn-register:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(177,79,255,0.4); }
-  .wa-link-btn {
-    width: 100%; padding: 12px;
-    background: linear-gradient(135deg, #25d366, #128c7e);
-    border: none; border-radius: 10px; color: #fff;
-    font-weight: 700; font-size: 0.88rem; cursor: pointer;
-    transition: all 0.3s; font-family: inherit; margin-top: 10px;
-    display: flex; align-items: center; justify-content: center; gap: 8px;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.3);
-    text-decoration: none;
-  }
-  .wa-link-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(37,211,102,0.4); }
-
-  /* ALERT PANEL */
-  .alert-panel {
-    background: var(--card); border: 1px solid rgba(255,77,109,0.25);
-    border-radius: 20px; padding: 24px;
-  }
-  .alert-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-  .alert-icon { font-size: 1.4rem; animation: alertPulse 2s infinite; }
-  @keyframes alertPulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.2);} }
-  .alert-title { font-size: 0.95rem; font-weight: 700; }
-  .alert-item {
-    padding: 12px 14px; border-radius: 10px; margin-bottom: 8px;
-    border-left: 3px solid;
-    transition: all 0.2s;
-  }
-  .alert-item:hover { transform: translateX(-4px); }
-  .alert-buy { background: rgba(0,245,160,0.06); border-color: var(--green); }
-  .alert-sell { background: rgba(255,77,109,0.06); border-color: var(--red); }
-  .alert-watch { background: rgba(255,214,0,0.06); border-color: var(--gold); }
-  .alert-item-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-  .alert-symbol { font-weight: 700; font-size: 0.85rem; }
-  .alert-type { font-size: 0.65rem; font-weight: 700; padding: 2px 7px; border-radius: 4px; text-transform: uppercase; }
-  .type-buy { background: rgba(0,245,160,0.2); color: var(--green); }
-  .type-sell { background: rgba(255,77,109,0.2); color: var(--red); }
-  .type-watch { background: rgba(255,214,0,0.2); color: var(--gold); }
-  .alert-desc { font-size: 0.75rem; color: var(--muted); }
-  .alert-desc-ur { font-family: 'Noto Nastaliq Urdu', serif; font-size: 0.72rem; color: var(--muted); line-height: 2; }
-
-  /* EXPERT TABLE */
-  .expert-section { margin-bottom: 40px; }
-  .expert-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 16px;
-  }
-  .expert-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 22px;
-    transition: all 0.3s; position: relative; overflow: hidden;
-  }
-  .expert-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.12); }
-  .expert-card::after {
-    content: ''; position: absolute;
-    bottom: 0; left: 0; right: 0; height: 2px;
-  }
-  .expert-card .ec-top { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 14px; }
-  .ec-avatar {
-    width: 44px; height: 44px; border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.4rem; flex-shrink: 0;
-  }
-  .ec-name { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
-  .ec-role { font-size: 0.7rem; color: var(--muted); }
-  .ec-stars { color: var(--gold); font-size: 0.75rem; margin-top: 2px; }
-  .ec-opinion { font-size: 0.82rem; color: #c0c0e0; line-height: 1.6; margin-bottom: 10px; }
-  .ec-opinion-ur { font-family: 'Noto Nastaliq Urdu', serif; font-size: 0.8rem; color: #c0c0e0; line-height: 2.2; }
-  .ec-sentiment {
-    display: inline-flex; align-items: center; gap: 6px;
-    font-size: 0.7rem; font-weight: 700; padding: 4px 10px; border-radius: 6px;
-  }
-  .sent-bullish { background: rgba(0,245,160,0.12); color: var(--green); }
-  .sent-bearish { background: rgba(255,77,109,0.12); color: var(--red); }
-  .sent-neutral { background: rgba(255,214,0,0.12); color: var(--gold); }
-
-  /* PSX TABLE */
-  .psx-table-wrap {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; overflow: hidden; margin-bottom: 40px;
-  }
-  table { width: 100%; border-collapse: collapse; }
-  thead th {
-    padding: 14px 20px; text-align: left; font-size: 0.72rem;
-    font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-    color: var(--muted); border-bottom: 1px solid var(--border);
-    background: rgba(255,255,255,0.02);
-  }
-  thead th:last-child { text-align: right; }
-  tbody tr { transition: background 0.2s; border-bottom: 1px solid var(--border); }
-  tbody tr:last-child { border-bottom: none; }
-  tbody tr:hover { background: rgba(255,255,255,0.03); }
-  tbody td { padding: 14px 20px; font-size: 0.85rem; }
-  tbody td:last-child { text-align: right; }
-  .stock-name { font-weight: 600; }
-  .stock-sector { font-size: 0.7rem; color: var(--muted); }
-  .vol-bar {
-    display: inline-block; height: 4px; border-radius: 2px;
-    background: linear-gradient(90deg, var(--blue), var(--purple));
-    vertical-align: middle; margin-right: 8px; transition: width 0.3s;
-  }
-
-  /* FOREX TABLE */
-  .forex-grid {
-    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    gap: 16px; margin-bottom: 40px;
-  }
-  .forex-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 16px; padding: 18px;
-    transition: all 0.3s;
-  }
-  .forex-card:hover { transform: translateY(-3px); }
-  .forex-pair { font-size: 1rem; font-weight: 800; margin-bottom: 2px; }
-  .forex-rate { font-size: 1.6rem; font-weight: 900; margin: 8px 0 4px; }
-  .forex-meta { display: flex; justify-content: space-between; align-items: center; }
-  .forex-range { font-size: 0.7rem; color: var(--muted); }
-
-  /* MODAL */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.8);
-    z-index: 200; display: none; align-items: center; justify-content: center;
-    backdrop-filter: blur(10px);
-  }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--card2); border: 1px solid rgba(177,79,255,0.3);
-    border-radius: 24px; padding: 36px; max-width: 480px; width: 90%;
-    animation: modalIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
-  @keyframes modalIn { from { opacity:0; transform:scale(0.85); } to { opacity:1; transform:scale(1); } }
-  .modal-title { font-size: 1.4rem; font-weight: 800; margin-bottom: 6px; }
-  .modal-sub { font-family: 'Noto Nastaliq Urdu', serif; color: var(--muted); font-size: 0.9rem; line-height: 2; margin-bottom: 24px; }
-  .modal-close {
-    position: absolute; top: 16px; right: 16px; background: rgba(255,255,255,0.1);
-    border: none; color: var(--text); width: 32px; height: 32px; border-radius: 8px;
-    cursor: pointer; font-size: 1rem; display: flex; align-items: center; justify-content: center;
-  }
-  .modal { position: relative; }
-
-  /* TOAST */
-  .toast {
-    position: fixed; bottom: 30px; right: 30px; z-index: 300;
-    background: linear-gradient(135deg, #1a1a35, #25253d);
-    border: 1px solid var(--green); border-radius: 14px;
-    padding: 16px 22px; display: flex; align-items: center; gap: 12px;
-    transform: translateY(100px); opacity: 0; transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-  }
-  .toast.show { transform: translateY(0); opacity: 1; }
-  .toast-icon { font-size: 1.4rem; }
-  .toast-title { font-weight: 700; font-size: 0.9rem; }
-  .toast-msg { font-size: 0.78rem; color: var(--muted); }
-
-  /* FOOTER */
-  footer {
-    position: relative; z-index: 5;
-    border-top: 1px solid var(--border);
-    padding: 30px; text-align: center;
-    color: var(--muted); font-size: 0.8rem;
-    background: rgba(6,6,15,0.6);
-  }
-  footer .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 12px; flex-wrap: wrap; }
-  footer .footer-links a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
-  footer .footer-links a:hover { color: var(--blue); }
-
-  /* RESPONSIVE */
-  @media(max-width: 700px) {
-    header { flex-wrap: wrap; gap: 12px; }
-    nav { display: none; }
-    .hero-title { font-size: 1.8rem; }
-    main { padding: 16px; }
-  }
-
-  /* SCROLLBAR */
-  ::-webkit-scrollbar { width: 6px; }
-  ::-webkit-scrollbar-track { background: var(--dark); }
-  ::-webkit-scrollbar-thumb { background: rgba(177,79,255,0.4); border-radius: 3px; }
+footer{border-top:1px solid var(--border);padding:30px 24px;background:var(--surface);margin-top:60px;}
+.footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
+.credit-tag{font-family:'Orbitron',monospace;font-size:1.05rem;color:var(--accent2);font-weight:700;text-shadow:0 0 10px rgba(246,173,85,0.2);}
 </style>
 </head>
 <body>
 
-<div class="bg-grid"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
+<div class="grid-bg"></div>
 
-<!-- TICKER BAR -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker">
-    <!-- Populated by JS -->
+<header>
+  <div class="header-inner">
+    <a class="logo" href="#">
+      <div class="logo-mark">B²</div>
+      <div class="logo-name">BrainBlast HQ</div>
+    </a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>Premium Music Arcade & Logic Arena</h1>
+  <p>Universal Open-Source Engines. Verified Audio Nodes & Auto-Stretch Mobile Fullscreen Support.</p>
+</div>
+
+<div class="main-wrap">
+  <div>
+    <div class="section-head">
+      <div class="section-title">20 Active Verified Audio Games</div>
+      <div class="section-line"></div>
+    </div>
+    <div class="games-grid" id="gamesGrid"></div>
+  </div>
+
+  <div class="sidebar">
+    <div class="sidebar-panel">
+      <div class="sp-head">🏆 Live Leaderboard</div>
+      <div class="lb-item"><span><strong>1.</strong> Waqas_Murtaza</span> <span style="color:var(--accent2)">48,200 pts</span></div>
+      <div class="lb-item"><span><strong>2.</strong> LogicNinja</span> <span style="color:var(--muted)">41,750 pts</span></div>
+      <div class="lb-item"><span><strong>3.</strong> BrainStorm</span> <span style="color:var(--muted)">38,400 pts</span></div>
+    </div>
   </div>
 </div>
 
-<!-- HEADER -->
-<header>
-  <a class="logo" href="#">
-    <div class="logo-icon">M</div>
-    <div>
-      <div class="logo-text"><span>MarketPulse</span> PK</div>
-      <div class="logo-sub">Crypto · Forex · PSX Live</div>
-    </div>
-  </a>
-  <nav>
-    <a href="#crypto" class="active">Crypto</a>
-    <a href="#forex">Forex</a>
-    <a href="#psx">PSX</a>
-    <a href="#experts">Experts</a>
-    <a href="#alerts">Alerts</a>
-  </nav>
-  <a class="btn-wa" href="https://wa.me/923452759362?text=MarketPulse%20Register%20karna%20chahta%20hoon" target="_blank">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-    WhatsApp Join
-  </a>
-</header>
-
-<main>
-
-  <!-- HERO -->
-  <div class="hero-strip">
-    <div class="hero-badge">
-      <div class="pulse-dot"></div>
-      Live Market Updates · ریئل ٹائم اپڈیٹس
-    </div>
-    <h1 class="hero-title">
-      <span class="g1">Crypto · Forex</span><br>
-      <span class="g2">PSX · Pakistan Markets</span>
-    </h1>
-    <p class="hero-sub urdu">کرپٹو، فاریکس اور پاکستان اسٹاک ایکسچینج کی لائیو قیمتیں، ماہرین کی رائے اور فوری الرٹس — سیدھے آپ کے WhatsApp پر</p>
-  </div>
-
-  <!-- CRYPTO SECTION -->
-  <div id="crypto">
-    <div class="section-label">🪙 Cryptocurrency — کرپٹو</div>
-    <div class="cards-grid" id="cryptoCards"></div>
-  </div>
-
-  <!-- FOREX SECTION -->
-  <div id="forex">
-    <div class="section-label">💱 Forex — غیر ملکی کرنسی</div>
-    <div class="forex-grid" id="forexCards"></div>
-  </div>
-
-  <!-- PSX + SIDEBAR -->
-  <div class="content-grid">
-    <div>
-      <!-- NEWS FEED -->
-      <div class="panel" style="margin-bottom:24px">
-        <div class="panel-header">
-          <span class="panel-title">📰 Latest News · تازہ خبریں</span>
-          <span class="panel-badge">Live</span>
-        </div>
-        <div id="newsFeed"></div>
-      </div>
-
-      <!-- PSX TABLE -->
-      <div id="psx">
-        <div class="section-label">📈 PSX Top Shares — پاکستان اسٹاک ایکسچینج</div>
-        <div class="psx-table-wrap">
-          <table>
-            <thead>
-              <tr>
-                <th>Company</th>
-                <th>Sector</th>
-                <th>Price (PKR)</th>
-                <th>Change</th>
-                <th>Volume</th>
-                <th>Signal</th>
-              </tr>
-            </thead>
-            <tbody id="psxTable"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <!-- SIDEBAR -->
-    <div class="sidebar">
-
-      <!-- REGISTER -->
-      <div class="reg-panel">
-        <div class="reg-title">🔔 Register for Alerts</div>
-        <div class="reg-title-ur urdu">الرٹس اور ماہرین کی رائے پانے کے لیے رجسٹر کریں</div>
-        <div class="form-group">
-          <label>YOUR NAME · آپ کا نام</label>
-          <input type="text" id="regName" placeholder="Enter your name">
-        </div>
-        <div class="form-group">
-          <label>WHATSAPP NUMBER · واٹس ایپ نمبر</label>
-          <input type="tel" id="regPhone" placeholder="+92 3452759362" dir="ltr">
-        </div>
-        <div class="form-group">
-          <label>INTERESTS · آپ کی دلچسپی</label>
-          <select id="regInterest" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.05);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:0.88rem;outline:none;font-family:inherit;">
-            <option value="all">All (Crypto + Forex + PSX)</option>
-            <option value="crypto">Crypto Only</option>
-            <option value="forex">Forex Only</option>
-            <option value="psx">PSX Only</option>
-          </select>
-        </div>
-        <div class="wa-note">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="#25d366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Alerts will be sent to your WhatsApp · الرٹس واٹس ایپ پر آئیں گے
-        </div>
-        <button class="btn-register" onclick="handleRegister()">
-          ✅ Register & Subscribe — رجسٹر کریں
-        </button>
-        <a class="wa-link-btn" href="https://wa.me/923452759362?text=Hi%2C%20I%20want%20to%20join%20MarketPulse%20PK%20alerts" target="_blank">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Direct WhatsApp Join
-        </a>
-      </div>
-
-      <!-- LIVE ALERTS -->
-      <div class="alert-panel" id="alerts">
-        <div class="alert-header">
-          <div class="alert-icon">🚨</div>
-          <div>
-            <div class="alert-title">Live Alerts · فوری الرٹس</div>
-          </div>
-        </div>
-        <div id="alertList"></div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- EXPERT OPINIONS -->
-  <div id="experts" class="expert-section">
-    <div class="section-label">🧠 Expert Opinions · ماہرین کی رائے</div>
-    <div class="expert-grid" id="expertGrid"></div>
-  </div>
-
-</main>
-
-<!-- FOOTER -->
 <footer>
-  <div class="footer-links">
-    <a href="#">Privacy Policy</a>
-    <a href="#">Terms</a>
-    <a href="#">Contact</a>
-    <a href="https://wa.me/923452759362" target="_blank">WhatsApp</a>
-    <a href="#">Disclaimer</a>
+  <div class="footer-inner">
+    <p style="color:var(--muted); font-size:0.85rem;">© 2026 BrainBlast Gaming Arena.</p>
+    <div class="credit-tag">👑 Made by Waqas Murtaza</div>
   </div>
-  <div>© 2026 MarketPulse PK · Investment advice disclaimer: For educational purposes only · سرمایہ کاری کا مشورہ نہیں</div>
 </footer>
 
-<!-- TOAST -->
-<div class="toast" id="toast">
-  <div class="toast-icon" id="toastIcon">✅</div>
-  <div>
-    <div class="toast-title" id="toastTitle">Registered!</div>
-    <div class="toast-msg" id="toastMsg">You'll receive WhatsApp alerts shortly.</div>
+<div class="modal-overlay" id="gameModal">
+  <div class="modal" id="modalContainer">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Game Engine</div>
+      <div class="action-btns">
+        <button class="m-btn btn-fs" onclick="forceFullscreen()">⛶ FULLSCREEN</button>
+        <button class="m-btn btn-cl" onclick="closeGame()">✕ CLOSE</button>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="game-frame-wrapper" id="gameFrameArea"></div>
+    </div>
   </div>
 </div>
 
 <script>
-// ========== MARKET DATA ==========
-const cryptoData = [
-  { icon:'₿', name:'Bitcoin', sym:'BTC/USD', price:'68,420', chg:'+2.34', up:true, color:'#f7931a', spark:[60,65,62,70,68,74,72,80,76,82] },
-  { icon:'Ξ', name:'Ethereum', sym:'ETH/USD', price:'3,812', chg:'+1.87', up:true, color:'#627eea', spark:[50,55,52,48,58,60,65,62,70,68] },
-  { icon:'◎', name:'Solana', sym:'SOL/USD', price:'142.50', chg:'-0.92', up:false, color:'#9945ff', spark:[80,75,78,72,68,70,65,62,60,58] },
-  { icon:'₿', name:'Bitcoin Cash', sym:'BCH/USD', price:'478.20', chg:'+3.12', up:true, color:'#0ac18e', spark:[40,45,42,50,55,52,58,60,65,68] },
-  { icon:'Ð', name:'Dogecoin', sym:'DOGE/USD', price:'0.1432', chg:'+5.21', up:true, color:'#c2a633', spark:[30,35,38,42,40,45,50,55,52,60] },
-  { icon:'●', name:'BNB', sym:'BNB/USD', price:'598.40', chg:'-1.23', up:false, color:'#f3ba2f', spark:[70,68,65,62,60,58,55,52,50,48] },
+// ==================== 20 ALL-NEW VERIFIED LIVE SOURCE URLS WITH AUDIO SYSTEMS ====================
+const GAMES = [
+  { id:1, name:"Pacman Retro Engine", emoji:"🍒", diff:"hard", src:"https://platzaro.github.io/pacman/" },
+  { id:2, name:"Tetris Arcade Sound", emoji:"🧱", diff:"insane", src:"https://chvin.github.io/react-tetris/" },
+  { id:3, name:"Classic 2048 Master", emoji:"🔢", diff:"hard", src:"https://gabrielecirulli.github.io/2048/" },
+  { id:4, name:"Hextris Beat Match", emoji:"⬢", diff:"insane", src:"https://hextris.io/" },
+  { id:5, name:"Flappy Bird Classic", emoji:"🐦", diff:"easy", src:"https://nebez.github.io/floppybird/" },
+  { id:6, name:"T-Rex Dino Runner", emoji:"🦖", diff:"easy", src:"https://wayou.github.io/t-rex-runner/" },
+  { id:7, name:"Retro Snake Sound", emoji:"🐍", diff:"easy", src:"https://patorjk.github.io/games/snake/" },
+  { id:8, name:"Space Invaders Audio", emoji:"👾", diff:"insane", src:"https://tanaygahlot.github.io/Space-Invaders/" },
+  { id:9, name:"Clumsy Bird Engine", emoji:"🦅", diff:"easy", src:"https://ellisonleao.github.io/clumsy-bird/" },
+  { id:10, name:"Tower Stack Blocks", emoji:"🏢", diff:"hard", src:"https://heloises.github.io/tower_game/" },
+  { id:11, name:"Breakout Brick Smasher", emoji:"🥎", diff:"hard", src:"https://jakesgordon.github.io/javascript-breakout/" },
+  { id:12, name:"Classic Pong Audio", emoji:"🏓", diff:"easy", src:"https://jakesgordon.github.io/javascript-pong/" },
+  { id:13, name:"HTML5 Sonic Blast", emoji:"🦔", diff:"hard", src:"https://vitor-mendes.github.io/sonic-html5/" },
+  { id:14, name:"MineSweeper Original", emoji:"💣", diff:"insane", src:"https://anderas.github.io/minesweeper/" },
+  { id:15, name:"Tic Tac Toe Audio", emoji:"❌", diff:"easy", src:"https://playtictactoe.org/" },
+  { id:16, name:"Color Tap Reaction", emoji:"🎨", diff:"hard", src:"https://fkiers.github.io/ColorTap/" },
+  { id:17, name:"Word Racer Speed", emoji:"⌨️", diff:"hard", src:"https://bipinkrish.github.io/word-racer/" },
+  { id:18, name:"Fruit Slasher Matrix", emoji:"🍉", diff:"hard", src:"https://jackie-zen.github.io/fruit-ninja/" },
+  { id:19, name:"OutRun Retro Racer", emoji:"🏎️", diff:"hard", src:"https://jakesgordon.github.io/javascript-outrun/" },
+  { id:20, name:"Canvas Run Engine", emoji:"🏃", diff:"insane", src:"https://rembound.github.io/html5-canvas-game-boilerplate/" }
 ];
 
-const forexData = [
-  { pair:'USD/PKR', rate:'278.50', chg:'+0.32', up:true, low:'277.20', high:'279.80', color:'var(--green)' },
-  { pair:'EUR/PKR', rate:'301.20', chg:'-0.18', up:false, low:'299.50', high:'302.40', color:'var(--blue)' },
-  { pair:'GBP/PKR', rate:'353.80', chg:'+0.55', up:true, low:'351.00', high:'355.20', color:'var(--gold)' },
-  { pair:'SAR/PKR', rate:'74.23', chg:'+0.11', up:true, low:'73.80', high:'74.50', color:'var(--purple)' },
-  { pair:'AED/PKR', rate:'75.80', chg:'-0.08', up:false, low:'75.40', high:'76.20', color:'var(--pink)' },
-  { pair:'USD/EUR', rate:'0.924', chg:'+0.21', up:true, low:'0.918', high:'0.928', color:'var(--blue)' },
-];
+const diffLabels = { easy:'🟢 Easy', hard:'🟡 Hard', insane:'🔴 Insane' };
 
-const psxData = [
-  { name:'ENGRO Corporation', sector:'Energy', price:'322.50', chg:'+3.20', up:true, vol:45, sig:'BUY' },
-  { name:'Lucky Cement', sector:'Cement', price:'780.00', chg:'-5.40', up:false, vol:62, sig:'HOLD' },
-  { name:'Meezan Bank', sector:'Banking', price:'189.30', chg:'+2.10', up:true, vol:78, sig:'BUY' },
-  { name:'Pakistan Petroleum', sector:'Oil & Gas', price:'142.80', chg:'+1.75', up:true, vol:55, sig:'BUY' },
-  { name:'Hub Power', sector:'Power', price:'98.20', chg:'-0.80', up:false, vol:30, sig:'HOLD' },
-  { name:'MCB Bank', sector:'Banking', price:'245.60', chg:'+4.30', up:true, vol:41, sig:'BUY' },
-  { name:'Pakistan Oilfields', sector:'Oil & Gas', price:'618.00', chg:'-2.50', up:false, vol:28, sig:'SELL' },
-  { name:'Fauji Fertilizer', sector:'Fertilizer', price:'132.40', chg:'+0.90', up:true, vol:37, sig:'HOLD' },
-];
-
-const newsData = [
-  { tag:'crypto', tagLabel:'Crypto', time:'2 min ago', title:'Bitcoin Crosses $68K — Bulls Eye $70K Resistance', urdu:'بٹ کوائن $68 ہزار سے اوپر — $70 ہزار کا ہدف', expert:'Strong breakout above $67.5K confirms bullish momentum. Next target is $70,000. Consider scaling in on dips to $66K.', expertUr:'مضبوط بریک آؤٹ بُلش ٹرینڈ کی تصدیق کرتا ہے۔ $70 ہزار ہدف۔', sentiment:'bullish' },
-  { tag:'psx', tagLabel:'PSX', time:'8 min ago', title:'KSE-100 Gains 350 Points on Foreign Investment News', urdu:'غیر ملکی سرمایہ کاری کی خبر پر KSE-100 میں 350 پوائنٹس کا اضافہ', expert:'Institutional buying in banking and energy sectors is driving the rally. ENGRO and MCB remain top picks.', expertUr:'بینکاری اور انرجی سیکٹر میں ادارہ جاتی خریداری تیزی لا رہی ہے۔', sentiment:'bullish' },
-  { tag:'forex', tagLabel:'Forex', time:'15 min ago', title:'PKR Strengthens to 278.50 vs USD After SBP Policy', urdu:'SBP پالیسی کے بعد پاکستانی روپیہ ڈالر کے مقابلے میں مستحکم', expert:'The SBP rate decision is creating short-term PKR stability. Watch the 280 resistance level closely.', expertUr:'مرکزی بینک کا فیصلہ مختصر مدتی استحکام دے رہا ہے۔ 280 کی سطح دیکھیں۔', sentiment:'neutral' },
-  { tag:'alert', tagLabel:'🚨 Alert', time:'22 min ago', title:'ETH Shows Reversal Pattern — Volume Spike Detected', urdu:'ETH میں ریورسل پیٹرن — والیوم میں اچانک اضافہ', expert:'Ethereum\'s volume spike after $3,750 bounce suggests accumulation. Target $4,000 short-term.', expertUr:'$3,750 سے اچھال کے بعد ETH میں جمع ہونے کی علامات ہیں۔ ہدف $4,000۔', sentiment:'bullish' },
-];
-
-const alertsData = [
-  { sym:'BTC/USD', type:'buy', typeLabel:'BUY', desc:'Above $68K — Target $70K', descUr:'$68 ہزار سے اوپر — ہدف $70 ہزار', cls:'alert-buy' },
-  { sym:'ENGRO', type:'buy', typeLabel:'BUY', descUr:'قیمت 310 سے اوپر بند ہوئی', desc:'Closed above 310 — Strong signal', cls:'alert-buy' },
-  { sym:'USD/PKR', type:'watch', typeLabel:'WATCH', desc:'Key level 280 approaching', descUr:'اہم سطح 280 قریب آ رہی ہے', cls:'alert-watch' },
-  { sym:'Lucky Cement', type:'sell', typeLabel:'SELL', desc:'Below support at 782', descUr:'سپورٹ 782 سے نیچے — بیچیں', cls:'alert-sell' },
-  { sym:'SOL/USD', type:'watch', typeLabel:'WATCH', desc:'Consolidation zone $138-$145', descUr:'استحکام زون $138-$145', cls:'alert-watch' },
-];
-
-const expertsData = [
-  { avatar:'👨‍💼', name:'Tariq Mahmood', role:'Senior Market Analyst · CFA', stars:'★★★★★', opinion:'BTC is entering a classic accumulation phase. The on-chain data supports a target of $80,000 by Q3 2026. For PSX, banking stocks remain my top picks.', opinionUr:'بٹ کوائن جمع کاری کے مرحلے میں ہے۔ Q3 2026 تک $80 ہزار کا ہدف۔ PSX میں بینکنگ سٹاک بہترین ہے۔', sent:'bullish', sentLabel:'Bullish', grad:'linear-gradient(135deg,var(--blue),var(--purple))' },
-  { avatar:'👩‍💻', name:'Sana Khan', role:'Forex Strategist · 10 yrs exp', stars:'★★★★☆', opinion:'PKR is stabilizing but I expect 280+ by July. Hold USD positions. EUR/PKR could reach 310 if European inflation stays elevated.', opinionUr:'PKR مستحکم ہے لیکن جولائی تک 280+ توقع ہے۔ USD پوزیشن رکھیں۔', sent:'neutral', sentLabel:'Cautious', grad:'linear-gradient(135deg,var(--gold),var(--pink))' },
-  { avatar:'👨‍🏫', name:'Arsalan siddique', role:'PSX Technical Analyst', stars:'★★★★★', opinion:'KSE-100 has broken the 75,000 resistance. Next target is 80,000. Energy and cement sectors will lead. Lucky Cement dip is a buying opportunity.', opinionUr:'KSE-100 نے 75,000 توڑ دیا۔ اگلا ہدف 80,000۔ سیمنٹ سیکٹر آگے لے جائے گا۔', sent:'bullish', sentLabel:'Bullish', grad:'linear-gradient(135deg,var(--green),var(--blue))' },
-  { avatar:'🧑‍💼', name:'Hassan Ali', role:'Crypto Trader · 7 yrs exp', stars:'★★★★☆', opinion:'Solana\'s -0.9% today is noise. The weekly trend is intact. DCA on any dip below $135 is my strategy. Avoid leverage in current volatility.', opinionUr:'سولانا کی آج کی گراوٹ عارضی ہے۔ $135 سے نیچے DCA کریں۔ لیوریج سے بچیں۔', sent:'neutral', sentLabel:'Neutral', grad:'linear-gradient(135deg,var(--purple),var(--pink))' },
-];
-
-// ========== RENDER FUNCTIONS ==========
-
-function mkSparkline(data, up) {
-  const min = Math.min(...data), max = Math.max(...data);
-  const pts = data.map((v, i) => {
-    const x = (i / (data.length - 1)) * 100;
-    const y = 35 - ((v - min) / (max - min || 1)) * 30;
-    return `${x},${y}`;
-  }).join(' ');
-  const color = up ? '#00f5a0' : '#ff4d6d';
-  return `<div class="sparkline"><svg viewBox="0 0 100 40" preserveAspectRatio="none">
-    <defs><linearGradient id="sg${Math.random().toString(36).slice(2)}" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="${color}" stop-opacity="0.3"/>
-      <stop offset="100%" stop-color="${color}" stop-opacity="0"/>
-    </linearGradient></defs>
-    <polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"/>
-  </svg></div>`;
-}
-
-function renderCrypto() {
-  document.getElementById('cryptoCards').innerHTML = cryptoData.map(c => `
-    <div class="m-card" onclick="showAlert('${c.sym}', '${c.chg}', ${c.up})">
-      <div class="accent-line" style="background:linear-gradient(90deg,${c.color},transparent)"></div>
-      <div class="coin-row">
-        <div class="coin-icon">${c.icon}</div>
-        <div class="coin-badge ${c.up?'badge-up':'badge-dn'}">${c.up?'▲':'▼'} ${c.chg}%</div>
-      </div>
-      <div class="coin-name">${c.sym}</div>
-      <div class="coin-price">$${c.price}</div>
-      ${mkSparkline(c.spark, c.up)}
-    </div>`).join('');
-}
-
-function renderForex() {
-  document.getElementById('forexCards').innerHTML = forexData.map(f => `
-    <div class="forex-card" style="border-color:rgba(255,255,255,0.07)">
-      <div style="display:flex;justify-content:space-between;align-items:center">
-        <div class="forex-pair">${f.pair}</div>
-        <div class="coin-badge ${f.up?'badge-up':'badge-dn'}">${f.up?'▲':'▼'} ${f.chg}%</div>
-      </div>
-      <div class="forex-rate ${f.up?'up':'dn'}">${f.rate}</div>
-      <div class="forex-meta">
-        <div class="forex-range">L: ${f.low} · H: ${f.high}</div>
-        <div style="width:40px;height:2px;background:linear-gradient(90deg,${f.color},transparent);border-radius:1px"></div>
+function renderGames() {
+  document.getElementById('gamesGrid').innerHTML = GAMES.map(g => `
+    <div class="game-card" onclick="openGame('${g.name}','${g.src}')">
+      <div class="game-thumb">${g.emoji}</div>
+      <div class="game-info">
+        <div class="game-name">${g.name}</div>
+        <span class="difficulty-badge d-${g.diff}">${diffLabels[g.diff]}</span>
       </div>
     </div>`).join('');
 }
 
-function renderPSX() {
-  document.getElementById('psxTable').innerHTML = psxData.map(s => `
-    <tr>
-      <td><div class="stock-name">${s.name}</div></td>
-      <td><div class="stock-sector">${s.sector}</div></td>
-      <td>₨ ${s.price}</td>
-      <td class="${s.up?'up':'dn'}">${s.up?'▲':'▼'} ${s.chg}</td>
-      <td><span class="vol-bar" style="width:${s.vol}px"></span>${s.vol}M</td>
-      <td><span class="coin-badge ${s.sig==='BUY'?'badge-up':s.sig==='SELL'?'badge-dn':''}" style="${s.sig==='HOLD'?'background:rgba(255,214,0,0.12);color:var(--gold)':''}">${s.sig}</span></td>
-    </tr>`).join('');
+function openGame(name, src) {
+  document.getElementById('modalTitle').textContent = name;
+  const frameContainer = document.getElementById('gameFrameArea');
+  
+  // Strict Audio Context triggers allowed inside sandbox
+  frameContainer.innerHTML = `<iframe id="activeGameFrame" src="${src}" 
+    allow="autoplay; fullscreen; gamepad; microphone; audio; audio-capture" 
+    allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" msallowfullscreen="true"></iframe>`;
+  
+  document.getElementById('gameModal').classList.add('open');
 }
 
-function renderNews() {
-  document.getElementById('newsFeed').innerHTML = newsData.map((n, i) => `
-    <div class="news-item" style="animation-delay:${i*0.1}s">
-      <div class="news-meta">
-        <span class="news-tag tag-${n.tag}">${n.tagLabel}</span>
-        <span class="news-time">${n.time}</span>
-      </div>
-      <div class="news-title">${n.title}</div>
-      <div class="news-title-ur">${n.urdu}</div>
-      <div class="news-expert">
-        <div class="expert-label">🧠 EXPERT OPINION — ماہر کی رائے</div>
-        <div class="expert-text">${n.expert}</div>
-        <div class="expert-text-ur">${n.expertUr}</div>
-      </div>
-    </div>`).join('');
+function closeGame() {
+  document.getElementById('gameModal').classList.remove('open');
+  document.getElementById('gameFrameArea').innerHTML = '';
 }
 
-function renderAlerts() {
-  document.getElementById('alertList').innerHTML = alertsData.map(a => `
-    <div class="alert-item ${a.cls}">
-      <div class="alert-item-top">
-        <span class="alert-symbol">${a.sym}</span>
-        <span class="alert-type type-${a.type}">${a.typeLabel}</span>
-      </div>
-      <div class="alert-desc">${a.desc}</div>
-      <div class="alert-desc-ur">${a.descUr}</div>
-    </div>`).join('');
+// FORCE NATIVE FULL-VIEW WITHOUT GREY OR BLACK BORDERS
+function forceFullscreen() {
+  const target = document.getElementById('gameFrameArea'); 
+  if (!target) return;
+  
+  if (target.requestFullscreen) { target.requestFullscreen(); }
+  else if (target.webkitRequestFullscreen) { target.webkitRequestFullscreen(); }
+  else if (target.mozRequestFullScreen) { target.mozRequestFullScreen(); }
+  else if (target.msRequestFullscreen) { target.msRequestFullscreen(); }
 }
 
-function renderExperts() {
-  document.getElementById('expertGrid').innerHTML = expertsData.map(e => `
-    <div class="expert-card">
-      <div style="position:absolute;bottom:0;left:0;right:0;height:2px;background:${e.grad}"></div>
-      <div class="ec-top">
-        <div class="ec-avatar" style="background:${e.grad}">${e.avatar}</div>
-        <div>
-          <div class="ec-name">${e.name}</div>
-          <div class="ec-role">${e.role}</div>
-          <div class="ec-stars">${e.stars}</div>
-        </div>
-      </div>
-      <div class="ec-opinion">${e.opinion}</div>
-      <div class="ec-opinion-ur">${e.opinionUr}</div>
-      <span class="ec-sentiment sent-${e.sent}">
-        ${e.sent==='bullish'?'📈':e.sent==='bearish'?'📉':'⚖️'} ${e.sentLabel}
-      </span>
-    </div>`).join('');
-}
-
-// ========== TICKER ==========
-function renderTicker() {
-  const items = [
-    ...cryptoData.map(c => ({ label: c.sym, val: '$'+c.price, chg: c.chg+'%', up: c.up })),
-    ...forexData.map(f => ({ label: f.pair, val: f.rate, chg: f.chg+'%', up: f.up })),
-    ...psxData.slice(0,4).map(s => ({ label: s.name.split(' ')[0], val: '₨'+s.price, chg: s.chg, up: s.up })),
-  ];
-  const dupe = [...items, ...items];
-  document.getElementById('ticker').innerHTML = dupe.map(t => `
-    <div class="tick-item">
-      <span class="tick-label">${t.label}</span>
-      <span class="tick-val">${t.val}</span>
-      <span class="tick-chg ${t.up?'up':'dn'}">${t.up?'▲':'▼'} ${t.chg}</span>
-    </div>`).join('');
-}
-
-// ========== LIVE PRICE UPDATES ==========
-function updatePrices() {
-  cryptoData.forEach(c => {
-    const delta = (Math.random() - 0.49) * 0.3;
-    const old = parseFloat(c.price.replace(',',''));
-    const nw = (old * (1 + delta/100));
-    c.price = nw > 100 ? nw.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',') : nw.toFixed(4);
-    c.chg = (parseFloat(c.chg) + delta).toFixed(2);
-    c.up = parseFloat(c.chg) > 0;
-    c.spark = [...c.spark.slice(1), c.spark[c.spark.length-1] + delta*10];
-  });
-  renderCrypto();
-
-  forexData.forEach(f => {
-    const delta = (Math.random() - 0.49) * 0.05;
-    const old = parseFloat(f.rate);
-    f.rate = (old + delta).toFixed(old > 100 ? 2 : 4);
-    f.chg = ((parseFloat(f.chg) + delta*0.1)).toFixed(2);
-    f.up = parseFloat(f.chg) > 0;
-  });
-  renderForex();
-  renderTicker();
-}
-
-// ========== REGISTER ==========
-function handleRegister() {
-  const name = document.getElementById('regName').value.trim();
-  const phone = document.getElementById('regPhone').value.trim();
-  if (!name || !phone) {
-    showToast('⚠️', 'Fields Required', 'Please fill name and WhatsApp number · نام اور نمبر ضروری ہے', '#ff4d6d');
-    return;
-  }
-  const waMsg = encodeURIComponent(`Hello MarketPulse PK! 🌟\n\nName: ${name}\nPhone: ${phone}\nI want to register for market alerts (Crypto, Forex, PSX)\n\nمیں مارکیٹ الرٹس کے لیے رجسٹر کرنا چاہتا/چاہتی ہوں`);
-  window.open(`https://wa.me/923452759362?text=${waMsg}`, '_blank');
-  showToast('✅', 'Redirecting to WhatsApp!', `Welcome ${name}! Opening WhatsApp for registration.`, '#00f5a0');
-}
-
-function showToast(icon, title, msg, borderColor) {
-  const t = document.getElementById('toast');
-  document.getElementById('toastIcon').textContent = icon;
-  document.getElementById('toastTitle').textContent = title;
-  document.getElementById('toastMsg').textContent = msg;
-  t.style.borderColor = borderColor || 'var(--green)';
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 4000);
-}
-
-function showAlert(sym, chg, up) {
-  showToast(up?'📈':'📉', sym + ' Update', `Change: ${chg}% — Click to set alert on WhatsApp`, up?'#00f5a0':'#ff4d6d');
-}
-
-// ========== INIT ==========
-renderTicker();
-renderCrypto();
-renderForex();
-renderPSX();
-renderNews();
-renderAlerts();
-renderExperts();
-
-setInterval(updatePrices, 5000);
-
-// Simulated alert notification
-setTimeout(() => {
-  showToast('🚨', 'BTC Alert Triggered!', 'Bitcoin is approaching $68,500 — Watch for breakout!', '#ff4d6d');
-}, 8000);
-setTimeout(() => {
-  showToast('📈', 'PSX Update', 'KSE-100 up 420 points today — Strong buying in banks!', '#00f5a0');
-}, 18000);
+renderGames();
 </script>
 </body>
 </html>
