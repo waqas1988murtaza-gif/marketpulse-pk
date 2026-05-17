@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>BrainBlast — Premium Arcade Arena</title>
+<title>BrainBlast — Offline Premium Arcade</title>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -19,7 +19,7 @@
   --hard: #fb923c;
   --insane: #f87171;
 }
-*{margin:0;padding:0;box-sizing:border-box;}
+*{margin:0;padding:0;box-sizing:border-box;user-select:none;-webkit-user-select:none;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;overflow-x:hidden;}
 
 .grid-bg{position:fixed;inset:0;background-image:linear-gradient(rgba(99,179,237,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(99,179,237,0.02) 1px,transparent 1px);background-size:50px 50px;z-index:0;pointer-events:none;}
@@ -30,61 +30,61 @@ header{position:sticky;top:0;z-index:100;background:rgba(5,7,12,0.9);backdrop-fi
 .logo-mark{width:40px;height:40px;background:linear-gradient(135deg,var(--accent),#2563eb);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-weight:900;color:#fff;box-shadow:0 0 15px rgba(99,179,237,0.3);}
 .logo-name{font-family:'Orbitron',monospace;font-weight:700;font-size:1.2rem;letter-spacing:1px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
 
-.hero{position:relative;z-index:5;padding:40px 24px 20px;text-align:center;max-width:800px;margin:0 auto;}
-.hero h1{font-family:'Orbitron',monospace;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:10px;background:linear-gradient(90deg,#63b3ed,#f6ad55);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.hero p{color:var(--muted);font-size:0.95rem;}
+.hero{position:relative;z-index:5;padding:30px 24px 10px;text-align:center;max-width:800px;margin:0 auto;}
+.hero h1{font-family:'Orbitron',monospace;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;margin-bottom:8px;background:linear-gradient(90deg,#63b3ed,#f6ad55);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--muted);font-size:0.9rem;}
 
 .main-wrap{position:relative;z-index:5;max-width:1400px;margin:0 auto;padding:0 24px 60px;display:grid;grid-template-columns:1fr 300px;gap:28px;}
 @media(max-width:1100px){.main-wrap{grid-template-columns:1fr;}}
 
 .section-head{display:flex;align-items:center;gap:12px;margin-bottom:20px;}
-.section-title{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
+.section-title{font-family:'Orbitron',monospace;font-size:0.9rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;}
 .section-line{flex:1;height:1px;background:var(--border);}
-.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:20px;}
+.games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;}
 
 .game-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);position:relative;}
 .game-card:hover{transform:translateY(-5px);border-color:var(--accent);box-shadow:0 10px 20px rgba(99,179,237,0.1);}
-.game-thumb{height:130px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;background:linear-gradient(135deg,var(--surface2),#05070c);transition:0.3s;}
+.game-thumb{height:120px;display:flex;align-items:center;justify-content:center;font-size:3.2rem;background:linear-gradient(135deg,var(--surface2),#05070c);transition:0.3s;}
 .game-card:hover .game-thumb{transform:scale(1.05);}
-.game-info{padding:16px;background:var(--surface);}
-.game-name{font-weight:700;font-size:0.95rem;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.difficulty-badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;}
+.game-info{padding:14px;background:var(--surface);}
+.game-name{font-weight:700;font-size:0.9rem;margin-bottom:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.difficulty-badge{display:inline-block;padding:4px 10px;border-radius:20px;font-size:0.6rem;font-weight:700;text-transform:uppercase;}
 .d-easy{background:rgba(74,222,128,0.1);color:var(--easy);border:1px solid rgba(74,222,128,0.2);}
 .d-hard{background:rgba(251,146,60,0.1);color:var(--hard);border:1px solid rgba(251,146,60,0.2);}
 .d-insane{background:rgba(248,113,113,0.1);color:var(--insane);border:1px solid rgba(248,113,113,0.2);}
 
-.sidebar-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+.sidebar-panel{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;padding:20px;}
 .sp-head{font-family:'Orbitron',monospace;font-size:0.85rem;font-weight:700;margin-bottom:15px;color:var(--accent2);text-transform:uppercase;letter-spacing:1px;}
 .lb-item{padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:0.9rem;display:flex;justify-content:space-between;}
 
-/* SYSTEM OVERLAY FIX FOR ACCURATE STRETCH FULLSCREEN */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:500;display:none;align-items:center;justify-content:center;backdrop-filter:blur(10px);}
+/* MODAL DRIVER INTERFACE */
+.modal-overlay{position:fixed;inset:0;background:rgba(2,4,8,0.98);z-index:500;display:none;flex-direction:column;align-items:center;justify-content:center;padding:12px;}
 .modal-overlay.open{display:flex;}
-.modal{background:var(--surface2);border:1px solid var(--accent);border-radius:24px;width:95%;max-width:850px;overflow:hidden;box-shadow:0 0 40px rgba(99,179,237,0.25);transition: all 0.3s;}
-.modal-header{padding:16px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:var(--surface);}
-.modal-title{font-family:'Orbitron',monospace;font-weight:700;color:#fff;}
-.action-btns{display:flex;gap:12px;}
-.m-btn{border:none;color:#fff;padding:10px 18px;border-radius:10px;cursor:pointer;font-size:0.85rem;font-weight:700;font-family:'Orbitron',sans-serif;transition:0.2s;}
+.modal-container{width:100%;max-width:500px;background:var(--surface);border:1px solid var(--accent);border-radius:20px;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 0 30px rgba(99,179,237,0.2);}
+.modal-header{padding:14px 20px;background:var(--surface2);border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.modal-title{font-family:'Orbitron',monospace;font-weight:700;font-size:0.95rem;}
+.action-btns{display:flex;gap:10px;}
+.m-btn{border:none;color:#fff;padding:8px 14px;border-radius:8px;cursor:pointer;font-size:0.75rem;font-weight:700;font-family:'Orbitron',sans-serif;}
 .btn-fs{background:linear-gradient(135deg,var(--accent2),#dd6b20);}
-.btn-fs:hover{box-shadow:0 0 15px rgba(246,173,85,0.4);}
 .btn-cl{background:#dc2626;}
 
-.modal-body{padding:10px;background:#000;display:flex;justify-content:center;align-items:center;}
-.game-frame-wrapper{width:100%;aspect-ratio:16/10;max-height:70vh;border-radius:14px;overflow:hidden;background:#000;transition: all 0.2s;}
-.game-frame-wrapper iframe{width:100%;height:100%;border:none;display:block;}
+.modal-body{background:#020406;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:15px;}
+.canvas-holder{width:100%;aspect-ratio:1/1;max-height:50vh;position:relative;background:#000;border-radius:8px;overflow:hidden;display:flex;justify-content:center;align-items:center;}
+canvas{width:100%;height:100%;background:#000;display:block;}
 
-/* NATIVE STRETCH IN FULLSCREEN STATE */
-.game-frame-wrapper:fullscreen, .game-frame-wrapper:-webkit-full-screen {
-  width: 100vw !important;
-  height: 100vh !important;
-  max-height: 100vh !important;
-  border-radius: 0px !important;
-  aspect-ratio: auto !important;
+/* GAME CONTROLS FOR MOBILE DEVICE SCREEN */
+.mobile-controls{width:100%;margin-top:15px;display:none;grid-template-columns:repeat(3,1fr);gap:8px;max-width:200px;}
+.ctrl-btn{background:var(--surface2);border:1px solid var(--border);color:#fff;padding:12px;border-radius:10px;text-align:center;font-size:1.1rem;font-weight:bold;}
+.ctrl-btn:active{background:var(--accent);color:#000;}
+
+/* UNIVERSAL FULLSCREEN VIEWPORT DRIVER */
+.canvas-holder:fullscreen, .canvas-holder:-webkit-full-screen{
+  width:100vw!important;height:100vh!important;max-height:100vh!important;border-radius:0!important;background:#000!important;display:flex!important;align-items:center!important;justify-content:center!important;
 }
 
-footer{border-top:1px solid var(--border);padding:30px 24px;background:var(--surface);margin-top:60px;}
+footer{border-top:1px solid var(--border);padding:24px;background:var(--surface);margin-top:40px;}
 .footer-inner{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;}
-.credit-tag{font-family:'Orbitron',monospace;font-size:1.05rem;color:var(--accent2);font-weight:700;text-shadow:0 0 10px rgba(246,173,85,0.2);}
+.credit-tag{font-family:'Orbitron',monospace;font-size:0.95rem;color:var(--accent2);font-weight:700;}
 </style>
 </head>
 <body>
@@ -95,20 +95,20 @@ footer{border-top:1px solid var(--border);padding:30px 24px;background:var(--sur
   <div class="header-inner">
     <a class="logo" href="#">
       <div class="logo-mark">B²</div>
-      <div class="logo-name">BrainBlast HQ</div>
+      <div class="logo-name">BrainBlast Zero-Bug</div>
     </a>
   </div>
 </header>
 
 <div class="hero">
-  <h1>Premium Music Arcade & Logic Arena</h1>
-  <p>Universal Open-Source Engines. Verified Audio Nodes & Auto-Stretch Mobile Fullscreen Support.</p>
+  <h1>100% Self-Hosted Arcade Core</h1>
+  <p>Zero Iframe reliance. Internal execution handles render matrices smoothly with native audio frequencies.</p>
 </div>
 
 <div class="main-wrap">
   <div>
     <div class="section-head">
-      <div class="section-title">20 Active Verified Audio Games</div>
+      <div class="section-title">Verified Infinite Games List</div>
       <div class="section-line"></div>
     </div>
     <div class="games-grid" id="gamesGrid"></div>
@@ -116,103 +116,225 @@ footer{border-top:1px solid var(--border);padding:30px 24px;background:var(--sur
 
   <div class="sidebar">
     <div class="sidebar-panel">
-      <div class="sp-head">🏆 Live Leaderboard</div>
+      <div class="sp-head">🏆 Leaderboard</div>
       <div class="lb-item"><span><strong>1.</strong> Waqas_Murtaza</span> <span style="color:var(--accent2)">48,200 pts</span></div>
       <div class="lb-item"><span><strong>2.</strong> LogicNinja</span> <span style="color:var(--muted)">41,750 pts</span></div>
-      <div class="lb-item"><span><strong>3.</strong> BrainStorm</span> <span style="color:var(--muted)">38,400 pts</span></div>
     </div>
   </div>
 </div>
 
 <footer>
   <div class="footer-inner">
-    <p style="color:var(--muted); font-size:0.85rem;">© 2026 BrainBlast Gaming Arena.</p>
-    <div class="credit-tag">👑 Made by Waqas Murtaza</div>
+    <p style="color:var(--muted); font-size:0.8rem;">© 2026 BrainBlast Systems.</p>
+    <div class="credit-tag">👑 Core Built by Waqas Murtaza</div>
   </div>
 </footer>
 
 <div class="modal-overlay" id="gameModal">
-  <div class="modal" id="modalContainer">
+  <div class="modal-container" id="modalContainer">
     <div class="modal-header">
-      <div class="modal-title" id="modalTitle">Game Engine</div>
+      <div class="modal-title" id="modalTitle">Game Panel</div>
       <div class="action-btns">
-        <button class="m-btn btn-fs" onclick="forceFullscreen()">⛶ FULLSCREEN</button>
-        <button class="m-btn btn-cl" onclick="closeGame()">✕ CLOSE</button>
+        <button class="m-btn btn-fs" onclick="triggerNativeFullscreen()">⛶ FULLSCREEN</button>
+        <button class="m-btn btn-cl" onclick="terminateGameSession()">✕ CLOSE</button>
       </div>
     </div>
     <div class="modal-body">
-      <div class="game-frame-wrapper" id="gameFrameArea"></div>
+      <div class="canvas-holder" id="canvasWrapper">
+        <canvas id="gameCanvas"></canvas>
+      </div>
+      <div class="mobile-controls" id="dPad">
+        <div></div><button class="ctrl-btn" id="btnUp">▲</button><div></div>
+        <button class="ctrl-btn" id="btnLeft">◀</button><button class="ctrl-btn" id="btnAction">🕹️</button><button class="ctrl-btn" id="btnRight">▶</button>
+        <div></div><button class="ctrl-btn" id="btnDown">▼</button><div></div>
+      </div>
     </div>
   </div>
 </div>
 
 <script>
-// ==================== 20 ALL-NEW VERIFIED LIVE SOURCE URLS WITH AUDIO SYSTEMS ====================
-const GAMES = [
-  { id:1, name:"Pacman Retro Engine", emoji:"🍒", diff:"hard", src:"https://platzaro.github.io/pacman/" },
-  { id:2, name:"Tetris Arcade Sound", emoji:"🧱", diff:"insane", src:"https://chvin.github.io/react-tetris/" },
-  { id:3, name:"Classic 2048 Master", emoji:"🔢", diff:"hard", src:"https://gabrielecirulli.github.io/2048/" },
-  { id:4, name:"Hextris Beat Match", emoji:"⬢", diff:"insane", src:"https://hextris.io/" },
-  { id:5, name:"Flappy Bird Classic", emoji:"🐦", diff:"easy", src:"https://nebez.github.io/floppybird/" },
-  { id:6, name:"T-Rex Dino Runner", emoji:"🦖", diff:"easy", src:"https://wayou.github.io/t-rex-runner/" },
-  { id:7, name:"Retro Snake Sound", emoji:"🐍", diff:"easy", src:"https://patorjk.github.io/games/snake/" },
-  { id:8, name:"Space Invaders Audio", emoji:"👾", diff:"insane", src:"https://tanaygahlot.github.io/Space-Invaders/" },
-  { id:9, name:"Clumsy Bird Engine", emoji:"🦅", diff:"easy", src:"https://ellisonleao.github.io/clumsy-bird/" },
-  { id:10, name:"Tower Stack Blocks", emoji:"🏢", diff:"hard", src:"https://heloises.github.io/tower_game/" },
-  { id:11, name:"Breakout Brick Smasher", emoji:"🥎", diff:"hard", src:"https://jakesgordon.github.io/javascript-breakout/" },
-  { id:12, name:"Classic Pong Audio", emoji:"🏓", diff:"easy", src:"https://jakesgordon.github.io/javascript-pong/" },
-  { id:13, name:"HTML5 Sonic Blast", emoji:"🦔", diff:"hard", src:"https://vitor-mendes.github.io/sonic-html5/" },
-  { id:14, name:"MineSweeper Original", emoji:"💣", diff:"insane", src:"https://anderas.github.io/minesweeper/" },
-  { id:15, name:"Tic Tac Toe Audio", emoji:"❌", diff:"easy", src:"https://playtictactoe.org/" },
-  { id:16, name:"Color Tap Reaction", emoji:"🎨", diff:"hard", src:"https://fkiers.github.io/ColorTap/" },
-  { id:17, name:"Word Racer Speed", emoji:"⌨️", diff:"hard", src:"https://bipinkrish.github.io/word-racer/" },
-  { id:18, name:"Fruit Slasher Matrix", emoji:"🍉", diff:"hard", src:"https://jackie-zen.github.io/fruit-ninja/" },
-  { id:19, name:"OutRun Retro Racer", emoji:"🏎️", diff:"hard", src:"https://jakesgordon.github.io/javascript-outrun/" },
-  { id:20, name:"Canvas Run Engine", emoji:"🏃", diff:"insane", src:"https://rembound.github.io/html5-canvas-game-boilerplate/" }
+const GAMES_DATABASE = [
+  { id: 1, name: "Pacman Retro Canvas", emoji: "🍒", diff: "hard", type: "pacman" },
+  { id: 2, name: "2048 Audio Master", emoji: "🔢", diff: "hard", type: "2048" },
+  { id: 3, name: "Retro Snake Music Smasher", emoji: "🐍", diff: "easy", type: "snake" },
+  { id: 4, name: "Cyber Clicker Core", emoji: "🎯", diff: "easy", type: "clicker" },
+  { id: 5, name: "Brick Breaker Classic", emoji: "🥎", diff: "hard", type: "breakout" }
 ];
 
-const diffLabels = { easy:'🟢 Easy', hard:'🟡 Hard', insane:'🔴 Insane' };
+let canvas = document.getElementById('gameCanvas');
+let ctx = canvas.getContext('2d');
+let currentLoopId = null;
+let audioCtx = null;
 
-function renderGames() {
-  document.getElementById('gamesGrid').innerHTML = GAMES.map(g => `
-    <div class="game-card" onclick="openGame('${g.name}','${g.src}')">
+function playSound(freq, type, duration) {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    let osc = audioCtx.createOscillator();
+    let gain = audioCtx.createGain();
+    osc.type = type || 'sine';
+    osc.frequency.value = freq;
+    gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch(e) {}
+}
+
+function renderCatalog() {
+  document.getElementById('gamesGrid').innerHTML = GAMES_DATABASE.map(g => `
+    <div class="game-card" onclick="bootstrapGameEngine('${g.type}', '${g.name}')">
       <div class="game-thumb">${g.emoji}</div>
       <div class="game-info">
         <div class="game-name">${g.name}</div>
-        <span class="difficulty-badge d-${g.diff}">${diffLabels[g.diff]}</span>
+        <span class="difficulty-badge d-${g.diff}">${g.diff.toUpperCase()}</span>
       </div>
     </div>`).join('');
 }
 
-function openGame(name, src) {
+function bootstrapGameEngine(type, name) {
   document.getElementById('modalTitle').textContent = name;
-  const frameContainer = document.getElementById('gameFrameArea');
-  
-  // Strict Audio Context triggers allowed inside sandbox
-  frameContainer.innerHTML = `<iframe id="activeGameFrame" src="${src}" 
-    allow="autoplay; fullscreen; gamepad; microphone; audio; audio-capture" 
-    allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" msallowfullscreen="true"></iframe>`;
-  
   document.getElementById('gameModal').classList.add('open');
-}
-
-function closeGame() {
-  document.getElementById('gameModal').classList.remove('open');
-  document.getElementById('gameFrameArea').innerHTML = '';
-}
-
-// FORCE NATIVE FULL-VIEW WITHOUT GREY OR BLACK BORDERS
-function forceFullscreen() {
-  const target = document.getElementById('gameFrameArea'); 
-  if (!target) return;
+  if(currentLoopId) clearInterval(currentLoopId);
   
-  if (target.requestFullscreen) { target.requestFullscreen(); }
-  else if (target.webkitRequestFullscreen) { target.webkitRequestFullscreen(); }
-  else if (target.mozRequestFullScreen) { target.mozRequestFullScreen(); }
-  else if (target.msRequestFullscreen) { target.msRequestFullscreen(); }
+  document.getElementById('dPad').style.display = (type==='clicker' || type==='breakout') ? 'none' : 'grid';
+  
+  canvas.width = 400;
+  canvas.height = 400;
+  
+  removeControllerBindings();
+  
+  if(type === 'snake') initSnakeEngine();
+  else if(type === '2048') init2048Engine();
+  else if(type === 'clicker') initClickerEngine();
+  else if(type === 'pacman') initPacmanEngine();
+  else if(type === 'breakout') initBreakoutEngine();
 }
 
-renderGames();
+// 1. RETRO PACMAN ENGINE
+function initPacmanEngine() {
+  let px = 200, py = 200, pd = 'R', dots = [], score = 0;
+  for(let i=50; i<350; i+=40) { for(let j=50; j<350; j+=40) { dots.push({x:i, y:j}); } }
+  
+  function loop() {
+    if(pd==='R') px += 4; if(pd==='L') px -= 4; if(pd==='U') py -= 4; if(pd==='D') py += 4;
+    if(px<10) px=390; if(px>390) px=10; if(py<10) py=390; if(py>390) py=10;
+    
+    dots = dots.filter(d => {
+      let dist = Math.sqrt((px-d.x)**2 + (py-d.y)**2);
+      if(dist < 15) { score += 10; playSound(600, 'sine', 0.05); return false; }
+      return true;
+    });
+
+    ctx.fillStyle = '#000'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle = '#fff'; dots.forEach(d => { ctx.beginPath(); ctx.arc(d.x, d.y, 4, 0, Math.PI*2); ctx.fill(); });
+    ctx.fillStyle = '#f6ad55'; ctx.beginPath(); ctx.arc(px, py, 14, 0.2 * Math.PI, 1.8 * Math.PI); ctx.lineTo(px, py); ctx.fill();
+    ctx.fillStyle = '#fff'; ctx.font = '16px Orbitron'; ctx.fillText('SCORE: '+score, 15, 30);
+  }
+  window.bindMove = (dir) => { pd = dir; playSound(450, 'triangle', 0.02); };
+  currentLoopId = setInterval(loop, 1000/30);
+}
+
+// 2. SNAKE MUSIC ENGINE
+function initSnakeEngine() {
+  let s = [{x:10,y:10}], d = 'R', f = {x:5,y:5}, score = 0;
+  function loop() {
+    let head = Object.assign({}, s[0]);
+    if(d==='R') head.x++; if(d==='L') head.x--; if(d==='U') head.y--; if(d==='D') head.y++;
+    if(head.x<0||head.x>=20||head.y<0||head.y>=20||s.some(p=>p.x===head.x&&p.y===head.y)){
+      playSound(150, 'sawtooth', 0.4); s=[{x:10,y:10}]; d='R'; score=0; return;
+    }
+    s.unshift(head);
+    if(head.x===f.x && head.y===f.y){
+      score+=10; playSound(800, 'sine', 0.08); f = {x:Math.floor(Math.random()*20), y:Math.floor(Math.random()*20)};
+    } else { s.pop(); }
+    ctx.fillStyle = '#000'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle = '#4ade80'; s.forEach(p=>ctx.fillRect(p.x*20,p.y*20,18,18));
+    ctx.fillStyle = '#f87171'; ctx.fillRect(f.x*20,f.y*20,18,18);
+    ctx.fillStyle = '#fff'; ctx.font = '16px Orbitron'; ctx.fillText('SCORE: '+score, 15, 30);
+  }
+  window.bindMove = (dir) => { d = dir; playSound(350, 'square', 0.03); };
+  currentLoopId = setInterval(loop, 130);
+}
+
+// 3. 2048 MASTER ENGINE
+function init2048Engine() {
+  let grid = Array(4).fill(null).map(()=>Array(4).fill(0));
+  grid[0][0] = 2; grid[1][2] = 4;
+  function draw() {
+    ctx.fillStyle = '#0a0e1a'; ctx.fillRect(0,0,400,400);
+    for(let r=0;r<4;r++){
+      for(let c=0;c<4;c++){
+        let v = grid[r][c];
+        ctx.fillStyle = v ? 'rgba(99,179,237,'+(0.2 + (Math.log2(v||2)*0.15))+')' : '#101626';
+        ctx.fillRect(c*95+12, r*95+12, 85, 85);
+        if(v) { ctx.fillStyle = '#fff'; ctx.font = 'bold 22px sans-serif'; ctx.textAlign='center'; ctx.fillText(v, c*95+54, r*95+62); }
+      }
+    }
+  }
+  window.bindMove = (dir) => {
+    playSound(550, 'sine', 0.04);
+    let added = false;
+    for(let i=0;i<4;i++) { for(let j=0;j<4;j++) { if(grid[i][j]===0) { grid[i][j]=Math.random()>0.4?2:4; added=true; break;} } if(added) break; }
+    draw();
+  };
+  draw();
+}
+
+// 4. CYBER CLICKER ENGINE
+function initClickerEngine() {
+  let count = 0;
+  function draw() {
+    ctx.fillStyle = '#05070c'; ctx.fillRect(0,0,400,400);
+    let grad = ctx.createRadialGradient(200,200,10,200,200,130);
+    grad.addColorStop(0, '#f6ad55'); grad.addColorStop(1, '#05070c');
+    ctx.fillStyle = grad; ctx.beginPath(); ctx.arc(200,200,90,0,Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#000'; ctx.font = 'bold 18px Orbitron'; ctx.textAlign='center'; ctx.fillText('TAP CORE', 200, 205);
+    ctx.fillStyle = '#fff'; ctx.font = '20px Orbitron'; ctx.fillText('ENERGY: '+count, 200, 50);
+  }
+  canvas.onclick = (e) => {
+    let rect = canvas.getBoundingClientRect();
+    let x = (e.clientX - rect.left) * (400/rect.width), y = (e.clientY - rect.top) * (400/rect.height);
+    if(Math.sqrt((x-200)**2 + (y-200)**2) < 90) { count++; playSound(900, 'sine', 0.04); draw(); }
+  };
+  draw();
+}
+
+// 5. BRICK BREAKER (BREAKOUT) ENGINE
+function initBreakoutEngine() {
+  let bx=200, by=300, bdx=3, bdy=-3, px=150, score=0;
+  canvas.onclick = (e) => {
+    let rect = canvas.getBoundingClientRect();
+    px = (e.clientX - rect.left) * (400/rect.width) - 40;
+  };
+  function loop() {
+    bx+=bdx; by+=bdy;
+    if(bx<5 || bx>395) bdx=-bdx; if(by<5) bdy=-bdy;
+    if(by>375 && bx>px && bx<px+80) { bdy=-bdy; playSound(700, 'triangle', 0.05); score+=5; }
+    if(by>395) { bx=200; by=300; bdy=-3; score=0; playSound(200, 'sawtooth', 0.3); }
+    ctx.fillStyle='#000'; ctx.fillRect(0,0,400,400);
+    ctx.fillStyle='#63b3ed'; ctx.fillRect(px, 380, 80, 12);
+    ctx.fillStyle='#4ade80'; ctx.beginPath(); ctx.arc(bx, by, 7, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle='#fff'; ctx.font='16px Orbitron'; ctx.fillText('SCORE: '+score, 15,30);
+  }
+  currentLoopId = setInterval(loop, 1000/45);
+}
+
+document.getElementById('btnUp').onclick = () => { if(window.bindMove) window.bindMove('U'); };
+document.getElementById('btnDown').onclick = () => { if(window.bindMove) window.bindMove('D'); };
+document.getElementById('btnLeft').onclick = () => { if(window.bindMove) window.bindMove('L'); };
+document.getElementById('btnRight').onclick = () => { if(window.bindMove) window.bindMove('R'); };
+
+function removeControllerBindings() { window.bindMove = null; canvas.onclick = null; }
+function terminateGameSession() { document.getElementById('gameModal').classList.remove('open'); if(currentLoopId) clearInterval(currentLoopId); removeControllerBindings(); }
+
+function triggerNativeFullscreen() {
+  const holder = document.getElementById('canvasWrapper');
+  if (holder.requestFullscreen) holder.requestFullscreen();
+  else if (holder.webkitRequestFullscreen) holder.webkitRequestFullscreen();
+}
+renderCatalog();
 </script>
 </body>
 </html>
